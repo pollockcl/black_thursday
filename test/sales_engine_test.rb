@@ -1,3 +1,4 @@
+# Tests for the SalesEngine class
 require './test/test_helper'
 require './lib/sales_engine'
 
@@ -8,6 +9,4 @@ class SalesEngineTest < MiniTest::Test
 
     assert_instance_of SalesEngine, se
   end
-
-
 end
