@@ -3,7 +3,7 @@ require './lib/item_repo'
 class ItemRepoTest < MiniTest::Test
   def setup
     csv = './data/items.csv'
-    @ir = ItemRepo.new(csv)
+    @ir = ItemRepo.new(csv, nil)
   end
 
   def test_existence

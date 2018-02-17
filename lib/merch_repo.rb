@@ -3,11 +3,12 @@ require_relative './data_analyst'
 require_relative './merchant'
 # This is the MerchRepo class
 class MerchRepo
-  attr_reader :merchants
-  def initialize(csv)
+  attr_reader :merchants, :parent
+  def initialize(csv, parent)
     @merchants = []
+    @parent    = parent
     DataAnalyst.find_merchants(csv).each do |item|
-      @merchants << Merchant.new(item[0], item[1])
+      @merchants << Merchant.new(item[0], item[1], self)
     end
   end
 
@@ -27,5 +28,9 @@ class MerchRepo
 
   def find_all_by_name(name)
     @merchants.select { |merch| merch.name.downcase.include?(name.downcase) }
+  end
+
+  def size
+    all.size
   end
 end

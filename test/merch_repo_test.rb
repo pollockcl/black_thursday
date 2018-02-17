@@ -4,7 +4,7 @@ require './lib/merch_repo'
 class MerchRepoTest < MiniTest::Test
   def setup
     csv = './data/merchants.csv'
-    @mr = MerchRepo.new(csv)
+    @mr = MerchRepo.new(csv, nil)
   end
 
   def test_existence

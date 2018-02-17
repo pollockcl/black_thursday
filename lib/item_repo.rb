@@ -2,11 +2,12 @@ require_relative 'item'
 require_relative 'data_analyst'
 # This is the ItemRepo class
 class ItemRepo
-  attr_reader :items
-  def initialize(csv)
-    @items = []
+  attr_reader :items, :parent
+  def initialize(csv, parent)
+    @items  = []
+    @parent = parent
     DataAnalyst.find_items(csv).each do |item|
-      @items << Item.new(item[0], item[1], item[2], item[3], item[4], item[5], item[6])
+      @items << Item.new(item[0], item[1], item[2], item[3], item[4], item[5], item[6], self)
     end
   end
 
@@ -40,5 +41,9 @@ class ItemRepo
   def find_all_by_merchant_id(merch_id)
     merch_id = merch_id.to_s unless merch_id.is_a?(String)
     @items.select { |item| item.merchant_id == merch_id }
+  end
+
+  def size
+    all.size
   end
 end
