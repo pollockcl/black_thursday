@@ -11,5 +11,4 @@ class SalesEngine
     @merchant_repo = MerchRepo.new(hash[:merchants])
     @item_repo     = ItemRepo.new(hash[:items])
   end
-
 end
