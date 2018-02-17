@@ -28,4 +28,8 @@ class ItemRepo
   def find_all_with_description(description)
     @items.select { |item| item.description.include?(description) }
   end
+
+  def find_all_by_price(price)
+    @items.select { |item| item.unit_price.to_i == price }
+  end
 end
