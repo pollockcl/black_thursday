@@ -42,4 +42,8 @@ class ItemRepo
     merch_id = merch_id.to_s unless merch_id.is_a?(String)
     @items.select { |item| item.merchant_id == merch_id }
   end
+
+  def size
+    all.size
+  end
 end
