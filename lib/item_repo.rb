@@ -9,4 +9,8 @@ class ItemRepo
       @items << Item.new(item[0], item[1], item[2], item[3], item[4], item[5], item[6])
     end
   end
+
+  def all
+    @items
+  end
 end

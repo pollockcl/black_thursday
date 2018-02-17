@@ -10,7 +10,7 @@ class ItemRepoTest < MiniTest::Test
     assert_instance_of ItemRepo, @ir
   end
 
-  def test_attributes
-    assert_equal 1367, @ir.items.size
+  def test_all
+    assert_equal 1367, @ir.all.size
   end
 end
