@@ -9,6 +9,6 @@ class SalesEngine
 
   def initialize(hash)
     @merchants = MerchRepo.new(hash[:merchants], self)
-    @items     = ItemRepo.new(hash[:items])
+    @items     = ItemRepo.new(hash[:items], self)
   end
 end

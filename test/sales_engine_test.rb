@@ -5,8 +5,9 @@ class SalesEngineTest < MiniTest::Test
   def setup
     @files = { items: './data/items.csv',
                merchants: './data/merchants.csv' }
-    @se        = SalesEngine.from_csv(@files)
-    @merchants = @se.merchants
+    @se             = SalesEngine.from_csv(@files)
+    @merchant_repo  = @se.merchants
+    @item_repo      = @se.items
   end
 
   def test_from_csv_method_and_existance
@@ -23,9 +24,15 @@ class SalesEngineTest < MiniTest::Test
   end
 
   def test_items_method
-    merchant = @merchants.find_by_id(12334478)
+    merchant = @merchant_repo.find_by_id(12334478)
 
     assert_equal 7, merchant.items.size
     assert_instance_of Item, merchant.items[0]
+  end
+
+  def test_merchants_method
+    item = @item_repo.find_by_id(263420195)
+
+    assert_equal 'DenesDoorDecor', item.merchant.name
   end
 end

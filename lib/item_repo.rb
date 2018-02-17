@@ -2,11 +2,12 @@ require_relative 'item'
 require_relative 'data_analyst'
 # This is the ItemRepo class
 class ItemRepo
-  attr_reader :items
-  def initialize(csv)
-    @items = []
+  attr_reader :items, :parent
+  def initialize(csv, parent)
+    @items  = []
+    @parent = parent
     DataAnalyst.find_items(csv).each do |item|
-      @items << Item.new(item[0], item[1], item[2], item[3], item[4], item[5], item[6])
+      @items << Item.new(item[0], item[1], item[2], item[3], item[4], item[5], item[6], self)
     end
   end
 
