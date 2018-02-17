@@ -34,11 +34,11 @@ class ItemRepo
   end
 
   def find_all_by_price_in_range(start, final)
-    @items.select{ |item| item.unit_price.to_i.between?(start, final) }
+    @items.select { |item| item.unit_price.to_i.between?(start, final) }
   end
 
   def find_all_by_merchant_id(merch_id)
     merch_id = merch_id.to_s unless merch_id.is_a?(String)
-    @items.select{ |item| item.merchant_id == merch_id }
+    @items.select { |item| item.merchant_id == merch_id }
   end
 end
