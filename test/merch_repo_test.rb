@@ -31,4 +31,11 @@ class MerchRepoTest < MiniTest::Test
     assert_equal 8, @mr.find_all_by_name('dar').size
     assert_equal 0, @mr.find_all_by_name('Darth').size
   end
+
+  def test_items_method
+    merchant = @mr.find_by_id(12334478)
+
+    assert_equal 7, merchant.items.size
+    assert_instance_of Item, merchant.items[0]
+  end
 end
