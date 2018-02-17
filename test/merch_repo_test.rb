@@ -36,7 +36,6 @@ class MerchRepoTest < MiniTest::Test
   end
 
   def test_items_method
-    skip
     merchant = @mr.find_by_id(12334478)
 
     assert_equal 7, merchant.items.size
