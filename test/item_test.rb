@@ -21,6 +21,6 @@ class ItemTest < MiniTest::Test
   def test_price_to_dollars
     item = Item.new(1, 'Pencil', 'You can use it to write things', BigDecimal.new(10.99,4), 1, Time.now, Time.now)
 
-    assert_equal '$10.99', item.unit_price_to_dollars
+    assert_equal 10.99, item.unit_price_to_dollars
   end
 end
