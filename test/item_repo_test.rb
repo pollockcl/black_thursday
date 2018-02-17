@@ -28,4 +28,9 @@ class ItemRepoTest < MiniTest::Test
     assert_equal 4, @ir.find_all_with_description('A4 or A5 prints available').size
     assert_equal [], @ir.find_all_with_description('Did you ever hear the tragedy of...')
   end
+
+  def test_find_all_by_price
+    assert_equal 2, @ir.find_all_by_price(120000).size
+    assert_equal [], @ir.find_all_by_price(0)
+  end
 end
