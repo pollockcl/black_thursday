@@ -15,7 +15,17 @@ class ItemRepoTest < MiniTest::Test
   end
 
   def test_find_by_id
-    assert_equal nil, @ir.find_by_id(-1)
+    assert_nil @ir.find_by_id(-1)
     assert_instance_of Item, @ir.find_by_id(263395237)
+  end
+
+  def test_find_by_name
+    assert_nil @ir.find_by_name('Farquad')
+    assert_instance_of Item, @ir.find_by_name('Le corps et la chauffeuse')
+  end
+
+  def test_find_all_with_description
+    assert_equal 4, @ir.find_all_with_description('A4 or A5 prints available').size
+    assert_equal [], @ir.find_all_with_description('Did you ever hear the tragedy of...')
   end
 end
