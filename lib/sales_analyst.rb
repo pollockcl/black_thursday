@@ -1,5 +1,5 @@
-# This is the SalesAnalyst class
 require_relative 'arithmatic'
+# This is the SalesAnalyst class
 class SalesAnalyst
   include Arithmatic
   def initialize(sales_engine)

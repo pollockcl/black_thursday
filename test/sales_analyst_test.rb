@@ -17,8 +17,9 @@ class SalesAnalystTest < MiniTest::Test
 
   def test_average_items_per_merchant
     sa = SalesAnalyst.new(@se)
+    expected = (@se.items.all.size / @se.merchants.all.size)
 
-    assert_equal (@se.items.all.size / @se.merchants.all.size), sa.average_items_per_merchant
+    assert_equal expected, sa.average_items_per_merchant
   end
 
   def test_average_items_per_merchant_standard_deviation

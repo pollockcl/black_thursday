@@ -24,14 +24,14 @@ class SalesEngineTest < MiniTest::Test
   end
 
   def test_items_method
-    merchant = @merchant_repo.find_by_id(12334478)
+    merchant = @merchant_repo.find_by_id(12_334_478)
 
     assert_equal 7, merchant.items.size
     assert_instance_of Item, merchant.items[0]
   end
 
   def test_merchants_method
-    item = @item_repo.find_by_id(263420195)
+    item = @item_repo.find_by_id(263_420_195)
 
     assert_equal 'DenesDoorDecor', item.merchant.name
   end

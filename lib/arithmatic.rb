@@ -4,14 +4,14 @@ module Arithmatic
     sales_engine.items.size / sales_engine.merchants.size
   end
 
-  def sample_minus_population_squared(sales_engine)
+  def mean_diff_squared(sales_engine)
     sales_engine.merchants.all.map do |merchant|
-      (merchant.items.size - average_items_per_merchant) ** 2
+      (merchant.items.size - average_items_per_merchant)**2
     end.sum
   end
 
   def variance(sales_engine)
-    sample_minus_population_squared(sales_engine) / (sales_engine.merchants.size - 1)
+    mean_diff_squared(sales_engine) / (sales_engine.merchants.size - 1)
   end
 
   def standard_deviation(sales_engine)
