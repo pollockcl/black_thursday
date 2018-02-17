@@ -8,6 +8,6 @@ class Merchant
   end
 
   def items
-    @parent.parent.items.find_by_id(@id)
+    @parent.parent.items.find_all_by_merchant_id(@id)
   end
 end
