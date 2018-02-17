@@ -4,10 +4,11 @@ require_relative './merchant'
 # This is the MerchRepo class
 class MerchRepo
   attr_reader :merchants
-  def initialize(csv)
+  def initialize(csv, parent)
     @merchants = []
+    @parent    = parent
     DataAnalyst.find_merchants(csv).each do |item|
-      @merchants << Merchant.new(item[0], item[1])
+      @merchants << Merchant.new(item[0], item[1], self)
     end
   end
 
