@@ -6,7 +6,7 @@ class ItemRepo
   def initialize(csv)
     @items = []
     DataAnalyst.find_items(csv).each do |item|
-      @items << Item.new(item[0], item[1], item[2], item[3], item[4])
+      @items << Item.new(item[0], item[1], item[2], item[3], item[4], item[5], item[6])
     end
   end
 end
