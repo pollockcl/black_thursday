@@ -1,15 +1,15 @@
-# DataAnalyst class. Handles csv processing
 require 'csv'
+# DataAnalyst class. Handles csv processing
 class DataAnalyst
   def self.find_merchants(file)
-    csv   = CSV.read(file, :headers => true)
+    csv   = CSV.read(file, headers: true)
     ids   = csv['id']
     names = csv['name']
     ids.zip(names)
   end
 
   def self.find_items(file)
-    csv = CSV.read(file, :headers => true)
+    csv = CSV.read(file, headers: true)
     id          = csv['id']
     name        = csv['name']
     description = csv['description']

@@ -1,7 +1,7 @@
-# This is the MerchRepo class
 require 'csv'
 require_relative './data_analyst'
 require_relative './merchant'
+# This is the MerchRepo class
 class MerchRepo
   attr_reader :merchants
   def initialize(csv)

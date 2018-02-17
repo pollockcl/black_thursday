@@ -1,6 +1,6 @@
-# The SalesEngine class
 require_relative './merch_repo'
 require_relative './item_repo'
+# The SalesEngine class
 class SalesEngine
   attr_reader :merchant_repo, :item_repo
   def self.from_csv(hash)

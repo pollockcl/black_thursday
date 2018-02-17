@@ -16,7 +16,7 @@ class ItemRepoTest < MiniTest::Test
 
   def test_find_by_id
     assert_nil @ir.find_by_id(-1)
-    assert_instance_of Item, @ir.find_by_id(263395237)
+    assert_instance_of Item, @ir.find_by_id(263_395_237)
   end
 
   def test_find_by_name
@@ -30,17 +30,17 @@ class ItemRepoTest < MiniTest::Test
   end
 
   def test_find_all_by_price
-    assert_equal 2, @ir.find_all_by_price(120000).size
+    assert_equal 2, @ir.find_all_by_price(120_000).size
     assert_equal [], @ir.find_all_by_price(0)
   end
 
   def test_find_all_by_price_in_range
-    assert_equal 3, @ir.find_all_by_price_in_range(250000, 300000).size
+    assert_equal 3, @ir.find_all_by_price_in_range(250_000, 300_000).size
     assert_equal [], @ir.find_all_by_price_in_range(-1, 10)
   end
 
   def test_find_all_by_merchant_id
-    assert_equal 6, @ir.find_all_by_merchant_id(12334185).size
+    assert_equal 6, @ir.find_all_by_merchant_id(12_334_185).size
     assert_equal [], @ir.find_all_by_merchant_id(-22)
   end
 end

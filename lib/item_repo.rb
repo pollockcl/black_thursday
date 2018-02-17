@@ -1,6 +1,6 @@
-# This is the ItemRepo class
 require_relative 'item'
 require_relative 'data_analyst'
+# This is the ItemRepo class
 class ItemRepo
   attr_reader :items
   def initialize(csv)
