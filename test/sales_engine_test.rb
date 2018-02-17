@@ -7,7 +7,7 @@ class SalesEngineTest < MiniTest::Test
               :merchants => "./data/merchants.csv"}
 
   end
-  
+
   def test_from_csv_method_and_existance
     se = SalesEngine.from_csv(@files)
 
@@ -17,7 +17,7 @@ class SalesEngineTest < MiniTest::Test
   def test_has_merch_and_items
     se = SalesEngine.from_csv(@files)
     
-    assert_instance_of ItemRepo, se.items
-    assert_instance_of MerchRepo, se.merchants
+    assert_instance_of ItemRepo, se.item_repo
+    assert_instance_of MerchRepo, se.merchant_repo
   end
 end
