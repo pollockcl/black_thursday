@@ -6,4 +6,11 @@ class MerchantTest < MiniTest::Test
 
     assert_instance_of Merchant, merchant
   end
+
+  def test_attributes
+    merchant = Merchant.new(1, 'Bobby')
+
+    assert_equal 1, merchant.id
+    assert_equal 'Bobby', merchant.name
+  end
 end
