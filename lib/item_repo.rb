@@ -16,7 +16,16 @@ class ItemRepo
 
   def find_by_id(id)
     id = id.to_s unless id.is_a?(String)
-    result = @items.select{ |item| item.id == id }
-    result == [] ? nil : result[0]
+    result = @items.select { |item| item.id == id }
+    result[0]
+  end
+
+  def find_by_name(name)
+    result = @items.select { |item| item.name == name }
+    result[0]
+  end
+
+  def find_all_with_description(description)
+    @items.select { |item| item.description.include?(description) }
   end
 end
