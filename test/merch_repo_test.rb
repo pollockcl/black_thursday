@@ -3,8 +3,11 @@ require './lib/merch_repo'
 
 class MerchRepoTest < MiniTest::Test
   def setup
+    @files = { items: './data/items.csv',
+               merchants: './data/merchants.csv'}
+    se  = SalesEngine.from_csv(@files)
     csv = './data/merchants.csv'
-    @mr = MerchRepo.new(csv)
+    @mr = se.merchants
   end
 
   def test_existence
@@ -33,6 +36,7 @@ class MerchRepoTest < MiniTest::Test
   end
 
   def test_items_method
+    skip
     merchant = @mr.find_by_id(12334478)
 
     assert_equal 7, merchant.items.size
