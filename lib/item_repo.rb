@@ -13,4 +13,10 @@ class ItemRepo
   def all
     @items
   end
+
+  def find_by_id(id)
+    id = id.to_s unless id.is_a?(String)
+    result = @items.select{ |item| item.id == id }
+    result == [] ? nil : result[0]
+  end
 end
