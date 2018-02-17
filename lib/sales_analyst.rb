@@ -1,10 +1,16 @@
 # This is the SalesAnalyst class
+require_relative 'arithmatic'
 class SalesAnalyst
+  include Arithmatic
   def initialize(sales_engine)
     @sales_engine = sales_engine
   end
 
   def average_items_per_merchant
-    @sales_engine.items.all.size / @sales_engine.merchants.all.size
+    average(@sales_engine)
+  end
+
+  def average_items_per_merchant_standard_deviation
+    standard_deviation(@sales_engine).round(2)
   end
 end
