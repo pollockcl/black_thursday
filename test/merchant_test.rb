@@ -1,4 +1,4 @@
-require 'test/test_helper'
+require_relative 'test_helper'
 require './lib/merchant'
 class MerchantTest < MiniTest::Test
   def test_existence
@@ -6,3 +6,4 @@ class MerchantTest < MiniTest::Test
 
     assert_instance_of Merchant, merchant
   end
+end
