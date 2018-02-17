@@ -33,4 +33,14 @@ class ItemRepoTest < MiniTest::Test
     assert_equal 2, @ir.find_all_by_price(120000).size
     assert_equal [], @ir.find_all_by_price(0)
   end
+
+  def test_find_all_by_price_in_range
+    assert_equal 3, @ir.find_all_by_price_in_range(250000, 300000).size
+    assert_equal [], @ir.find_all_by_price_in_range(-1, 10)
+  end
+
+  def test_find_all_by_merchant_id
+    assert_equal 6, @ir.find_all_by_merchant_id(12334185).size
+    assert_equal [], @ir.find_all_by_merchant_id(-22)
+  end
 end
