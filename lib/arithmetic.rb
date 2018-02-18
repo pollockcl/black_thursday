@@ -2,7 +2,7 @@ require 'bigdecimal'
 # This is the Arithmatic module
 module Arithmetic
   def avg_items_per_merchant(sales_engine)
-    (sales_engine.items.size / sales_engine.merchants.size).to_f
+    BigDecimal(sales_engine.items.size) / BigDecimal(sales_engine.merchants.size)
   end
 
   def sum_diff_means_items_per_merchant_squared(sales_engine)
@@ -41,7 +41,7 @@ module Arithmetic
   #     sum += avg_item_price_for_merchant(sales_engine, merchant.id)
   #   end
   # end
-  #
+
   # def avg_avg_item_prices_per_merchant(sales_engine)
   #   sum_avg_item_prices_all_merchants(sales_engine) / \
   #     sales_engine.merchants.size
