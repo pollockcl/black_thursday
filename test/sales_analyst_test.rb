@@ -1,4 +1,5 @@
 require_relative 'test_helper'
+require './lib/sales_engine'
 require './lib/sales_analyst'
 
 class SalesAnalystTest < MiniTest::Test
@@ -26,5 +27,13 @@ class SalesAnalystTest < MiniTest::Test
     sa = SalesAnalyst.new(@se)
 
     assert_equal 3.32, sa.average_items_per_merchant_standard_deviation
+  end
+
+  def test_merchants_with_high_item_count
+    sa = SalesAnalyst.new(@se)
+
+    assert_instance_of Array, sa.merchants_with_high_item_count
+    assert_instance_of Merchant, sa.merchants_with_high_item_count[0]
+    assert_equal 114, sa.merchants_with_high_item_count.size
   end
 end
