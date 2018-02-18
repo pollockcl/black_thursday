@@ -1,22 +1,23 @@
 require 'bigdecimal'
 # This is the Arithmatic module
 module Arithmetic
-  def average(sales_engine)
+  def avg_items_per_merchant(sales_engine)
     (sales_engine.items.size / sales_engine.merchants.size).to_f
   end
 
-  def mean_diff_squared(sales_engine)
+  def sum_diff_means_items_per_merchant_squared(sales_engine)
     sales_engine.merchants.all.map do |merchant|
-      (merchant.items.size - average_items_per_merchant)**2
+      (merchant.items.size - avg_items_per_merchant(sales_engine))**2
     end.sum
   end
 
-  def variance(sales_engine)
-    mean_diff_squared(sales_engine) / (sales_engine.merchants.size - 1)
+  def variance_items_per_merchant(sales_engine)
+    sum_diff_means_items_per_merchant_squared(sales_engine) /\
+      (sales_engine.merchants.size - 1)
   end
 
-  def standard_deviation(sales_engine)
-    Math.sqrt(variance(sales_engine))
+  def std_deviation_items_per_merchant(sales_engine)
+    Math.sqrt(variance_items_per_merchant(sales_engine))
   end
 
   def total_units_for_merchant(sales_engine, id)
@@ -31,19 +32,34 @@ module Arithmetic
 
   # moved core formula here because of the need to carry out division over two lines
   def avg_item_price_for_merchant(sales_engine, id)
-    sum_unit_prices_for_merchant(sales_engine, id) /\
+    sum_unit_prices_for_merchant(sales_engine, id) / \
       total_units_for_merchant(sales_engine, id)
   end
 
-  def sum_average_item_price_all_merchants(sales_engine)
+  def sum_avg_item_prices_all_merchants(sales_engine)
     sales_engine.merchants.all.reduce(BigDecimal.new(0)) do |sum, merchant|
-      sum += average_item_price_for_merchant(merchant.id)
+      sum += avg_item_price_for_merchant(sales_engine, merchant.id)
     end
   end
 
-# moved core formula here because of the need to carry out division over two lines
-  def avg_avg_price_per_merchant(sales_engine)
-    sum_average_item_price_all_merchants(sales_engine) /\
-      sales_engine.merchants.all.size
+  def avg_avg_item_prices_per_merchant(sales_engine)
+    sum_avg_item_prices_all_merchants(sales_engine) / \
+      sales_engine.merchants.size
+  end
+
+  def sum_diff_means_avg_item_prices_per_merchant_squared(sales_engine)
+    sales_engine.merchants.all.map do |merchant|
+      (avg_item_price_for_merchant(sales_engine, merchant.id) -
+        avg_avg_item_prices_per_merchant(sales_engine))**2
+    end.sum
+  end
+
+  def variance_avg_item_prices_per_merchant(sales_engine)
+    sum_diff_means_avg_item_prices_per_merchant_squared(sales_engine) / \
+      (sales_engine.merchants.size - 1)
+  end
+
+  def std_deviation_avg_item_prices_per_merchant(sales_engine)
+    Math.sqrt(variance_avg_item_prices_per_merchant(sales_engine))
   end
 end

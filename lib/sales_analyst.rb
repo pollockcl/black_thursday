@@ -6,14 +6,15 @@ class SalesAnalyst
   def initialize(sales_engine)
     @sales_engine = sales_engine
     @standard_deviation_items = average_items_per_merchant_standard_deviation
+    @standard_deviation_avg_item_price = average_average_item_prices_per_merchant_standard_deviation
   end
 
   def average_items_per_merchant
-    average(@sales_engine)
+    avg_items_per_merchant(@sales_engine)
   end
 
   def average_items_per_merchant_standard_deviation
-    standard_deviation(@sales_engine).round(2)
+    std_deviation_items_per_merchant(@sales_engine).round(2)
   end
 
   def merchants_with_high_item_count
@@ -22,11 +23,15 @@ class SalesAnalyst
     end
   end
 
-  def average_item_price_for_merchant(id)
+  def average_item_prices_for_merchant(id)
     avg_item_price_for_merchant(@sales_engine, id)
   end
 
-  def average_average_price_per_merchant
-    avg_avg_price_per_merchant(@sales_engine)
+  def average_average_item_prices_per_merchant
+    avg_avg_item_prices_per_merchant(@sales_engine)
+  end
+
+  def average_average_item_prices_per_merchant_standard_deviation
+    std_deviation_avg_item_prices_per_merchant(@sales_engine)
   end
 end
