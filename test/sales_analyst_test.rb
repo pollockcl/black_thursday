@@ -26,14 +26,35 @@ class SalesAnalystTest < MiniTest::Test
   def test_average_items_per_merchant_standard_deviation
     sa = SalesAnalyst.new(@se)
 
-    assert_equal 3.32, sa.average_items_per_merchant_standard_deviation
+    assert_equal 3.38, sa.average_items_per_merchant_standard_deviation
   end
 
-  def test_merchants_with_high_item_count
+  def test_merchants_with_high_item_count_method
     sa = SalesAnalyst.new(@se)
 
-    assert_instance_of Array, sa.merchants_with_high_item_count
     assert_instance_of Merchant, sa.merchants_with_high_item_count[0]
     assert_equal 114, sa.merchants_with_high_item_count.size
+  end
+
+  def test_total_units_for_merchant_method
+    sa = SalesAnalyst.new(@se)
+
+    assert_instance_of BigDecimal, sa.total_units_for_merchant(12_334_105)
+    assert_equal 3, sa.total_units_for_merchant(12_334_105)
+  end
+
+  def test_sum_unit_prices_for_merchant_method
+    sa = SalesAnalyst.new(@se)
+
+    assert_instance_of BigDecimal, sa.sum_unit_prices_for_merchant(12_334_105)
+    assert_equal 4_997, sa.sum_unit_prices_for_merchant(12_334_105)
+  end
+
+  def test_average_item_price_for_merchant_method
+    sa = SalesAnalyst.new(@se)
+    actual = sa.average_item_price_for_merchant(12_334_105)
+
+    assert_instance_of BigDecimal, actual
+    assert_equal 1_665.67, actual.round(2)
   end
 end
