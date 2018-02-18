@@ -23,7 +23,6 @@ class SalesAnalyst
   end
 
   def average_item_price_for_merchant(id)
-    sum_unit_prices_for_merchant(@sales_engine, id) /\
-      total_units_for_merchant(@sales_engine, id)
+    avg_item_price_for_merchant(@sales_engine, id)
   end
 end

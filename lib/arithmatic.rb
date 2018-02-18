@@ -28,4 +28,9 @@ module Arithmatic
       sum += item.unit_price_to_dollars
     end
   end
+
+  def avg_item_price_for_merchant(sales_engine, id)
+    sum_unit_prices_for_merchant(sales_engine, id) /\
+      total_units_for_merchant(sales_engine, id)
+  end
 end
