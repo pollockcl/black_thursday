@@ -1,8 +1,8 @@
-require_relative 'arithmatic'
+require_relative 'arithmetic'
 require 'bigdecimal'
 # This is the SalesAnalyst class
 class SalesAnalyst
-  include Arithmatic
+  include Arithmetic
   def initialize(sales_engine)
     @sales_engine = sales_engine
     @standard_deviation_items = average_items_per_merchant_standard_deviation
