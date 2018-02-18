@@ -22,17 +22,8 @@ class SalesAnalyst
     end
   end
 
-  def total_units_for_merchant(id)
-    BigDecimal(@sales_engine.items.find_all_by_merchant_id(id).size)
-  end
-
-  def sum_unit_prices_for_merchant(id)
-    @sales_engine.items.find_all_by_merchant_id(id).reduce(BigDecimal.new(0)) do |sum, item|
-      sum += item.unit_price_to_dollars
-    end
-  end
-
   def average_item_price_for_merchant(id)
-    sum_unit_prices_for_merchant(id) / total_units_for_merchant(id)
+    sum_unit_prices_for_merchant(@sales_engine, id) /\
+      total_units_for_merchant(@sales_engine, id)
   end
 end
