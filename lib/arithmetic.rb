@@ -29,6 +29,7 @@ module Arithmetic
     end
   end
 
+  # moved core formula here because of the need to carry out division over two lines
   def avg_item_price_for_merchant(sales_engine, id)
     sum_unit_prices_for_merchant(sales_engine, id) /\
       total_units_for_merchant(sales_engine, id)
@@ -38,5 +39,11 @@ module Arithmetic
     sales_engine.merchants.all.reduce(BigDecimal.new(0)) do |sum, merchant|
       sum += average_item_price_for_merchant(merchant.id)
     end
+  end
+
+# moved core formula here because of the need to carry out division over two lines
+  def avg_avg_price_per_merchant(sales_engine)
+    sum_average_item_price_all_merchants(sales_engine) /\
+      sales_engine.merchants.all.size
   end
 end

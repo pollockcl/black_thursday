@@ -27,6 +27,6 @@ class SalesAnalyst
   end
 
   def average_average_price_per_merchant
-    sum_average_item_price_all_merchants(@sales_engine) / @sales_engine.merchants.all.size
+    avg_avg_price_per_merchant(@sales_engine)
   end
 end
