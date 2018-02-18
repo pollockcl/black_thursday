@@ -34,7 +34,7 @@ class SalesAnalystTest < MiniTest::Test
 
     assert_instance_of Array, sa.merchants_with_high_item_count
     assert_instance_of Merchant, sa.merchants_with_high_item_count[0]
-    assert_equal 114, sa.merchants_with_high_item_count.size # tough to calculate on our own...need to check this value manually
+    assert_equal 114, sa.merchants_with_high_item_count.size # tough to calculate on our own...seems right, but we need to check this value manually (with fixtures?)
   end
 
   def test_total_units_for_merchant_method

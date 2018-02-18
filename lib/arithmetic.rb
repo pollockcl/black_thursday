@@ -36,30 +36,30 @@ module Arithmetic
       total_units_for_merchant(sales_engine, id)
   end
 
-  def sum_avg_item_prices_all_merchants(sales_engine)
-    sales_engine.merchants.all.reduce(BigDecimal.new(0)) do |sum, merchant|
-      sum += avg_item_price_for_merchant(sales_engine, merchant.id)
-    end
-  end
-
-  def avg_avg_item_prices_per_merchant(sales_engine)
-    sum_avg_item_prices_all_merchants(sales_engine) / \
-      sales_engine.merchants.size
-  end
-
-  def sum_diff_means_avg_item_prices_per_merchant_squared(sales_engine)
-    sales_engine.merchants.all.map do |merchant|
-      (avg_item_price_for_merchant(sales_engine, merchant.id) -
-        avg_avg_item_prices_per_merchant(sales_engine))**2
-    end.sum
-  end
-
-  def variance_avg_item_prices_per_merchant(sales_engine)
-    sum_diff_means_avg_item_prices_per_merchant_squared(sales_engine) / \
-      (sales_engine.merchants.size - 1)
-  end
-
-  def std_deviation_avg_item_prices_per_merchant(sales_engine)
-    Math.sqrt(variance_avg_item_prices_per_merchant(sales_engine))
-  end
+  # def sum_avg_item_prices_all_merchants(sales_engine)
+  #   sales_engine.merchants.all.reduce(BigDecimal.new(0)) do |sum, merchant|
+  #     sum += avg_item_price_for_merchant(sales_engine, merchant.id)
+  #   end
+  # end
+  #
+  # def avg_avg_item_prices_per_merchant(sales_engine)
+  #   sum_avg_item_prices_all_merchants(sales_engine) / \
+  #     sales_engine.merchants.size
+  # end
+  #
+  # def sum_diff_means_avg_item_prices_per_merchant_squared(sales_engine)
+  #   sales_engine.merchants.all.map do |merchant|
+  #     (avg_item_price_for_merchant(sales_engine, merchant.id) -
+  #       avg_avg_item_prices_per_merchant(sales_engine))**2
+  #   end.sum
+  # end
+  #
+  # def variance_avg_item_prices_per_merchant(sales_engine)
+  #   sum_diff_means_avg_item_prices_per_merchant_squared(sales_engine) / \
+  #     (sales_engine.merchants.size - 1)
+  # end
+  #
+  # def std_deviation_avg_item_prices_per_merchant(sales_engine)
+  #   Math.sqrt(variance_avg_item_prices_per_merchant(sales_engine))
+  # end
 end
