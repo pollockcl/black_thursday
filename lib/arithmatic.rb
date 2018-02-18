@@ -33,4 +33,10 @@ module Arithmatic
     sum_unit_prices_for_merchant(sales_engine, id) /\
       total_units_for_merchant(sales_engine, id)
   end
+
+  def sum_average_item_price_all_merchants(sales_engine)
+    sales_engine.merchants.all.reduce(BigDecimal.new(0)) do |sum, merchant|
+      sum += average_item_price_for_merchant(merchant.id)
+    end
+  end
 end
