@@ -29,7 +29,8 @@ class SalesAnalyst
     std_deviation = average_items_per_merchant_standard_deviation
     avg           = average_items_per_merchant
     merchants.select do |merchant|
-      ((merchant.items.size - avg) / std_deviation) > 1
+      data = merchant.items.size
+      z_score(avg, std_deviation, data) > 1
     end
   end
 
@@ -40,16 +41,19 @@ class SalesAnalyst
   end
 
   def average_average_price_per_merchant
-    total = merchants.reduce(0) do |total, merchant|
-      total + average_item_price_for_merchant(merchant.id)
+    total = merchants.reduce(0) do |sum, merchant|
+      sum + average_item_price_for_merchant(merchant.id)
     end
     average(total, merchants.size)
   end
 
   def golden_items
-    range   = merchants.map{ |merch| average_item_price_for_merchant(merch.id) } 
-    average = average_average_price_per_merchant
-    std_deviation = standard_deviation(range, average)
-    merchants.select { |merch| ((average_item_price_for_merchant(merch.id) - average) / std_deviation) > 2 }
+    range = merchants.map{ |merch| average_item_price_for_merchant(merch.id) }
+    avg   = average_average_price_per_merchant
+    std_deviation = standard_deviation(range, avg)
+    merchants.select do |merch|
+      data = average_item_price_for_merchant(merch.id)
+      z_score(avg, std_deviation, data) > 2
+    end
   end
 end
