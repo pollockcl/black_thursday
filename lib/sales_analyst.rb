@@ -31,4 +31,10 @@ class SalesAnalyst
       ((merchant.items.size - avg) / std_deviation) > 1
     end
   end
+
+  def average_item_price_for_merchant(merchant_id)
+    inventory = @sales_engine.merchants.find_by_id(merchant_id).items
+    prices    = inventory.map { |item| item.unit_price.to_i }
+    average(prices.sum, inventory.size)
+  end
 end
