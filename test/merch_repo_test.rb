@@ -1,14 +1,14 @@
-require './test/test_helper'
-require './lib/merch_repository'
+require_relative './test_helper'
+require_relative '../lib/merch_repository'
 
-class MerchRepoTest < MiniTest::Test
+class MerchRepositoryTest < MiniTest::Test
   def setup
     csv = './data/merchants.csv'
-    @mr = MerchRepo.new(csv, nil)
+    @mr = MerchRepository.new(csv, nil)
   end
 
   def test_existence
-    assert_instance_of MerchRepo, @mr
+    assert_instance_of MerchRepository, @mr
   end
 
   def test_all_method
