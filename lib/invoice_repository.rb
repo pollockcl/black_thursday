@@ -39,6 +39,10 @@ class InvoiceRepository
     @invoices.select { |invoice| invoice.merchant_id == merchant_id }
   end
 
+  def find_all_by_status(status)
+    @invoices.select { |invoice| invoice.status.downcase == status.downcase }
+  end
+
   # def find_all_with_description(description)
   #   @invoices.select do |invoice|
   #     invoice_description = invoice.description.downcase
