@@ -9,14 +9,20 @@ class SalesAnalyst
   end
 
   def items
-    @sales_engine.items.size
+    @sales_engine.items.all
   end
 
   def merchants
-    @sales_engine.merchants.size
+    @sales_engine.merchants.all
   end
 
   def average_items_per_merchant
-    average(items, merchants)
+    average(items.size, merchants.size)
+  end
+
+  def average_items_per_merchant_standard_deviation
+    (Math.sqrt(merchants.map do |merchant|
+      (merchant.items.size - average_items_per_merchant)**2
+    end.sum / merchants.size)).round(2)
   end
 end
