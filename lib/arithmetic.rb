@@ -2,13 +2,13 @@ require 'bigdecimal'
 # This is the Arithmatic module
 module Arithmetic
   def average(numerator, denominator)
-    (BigDecimal(numerator) / BigDecimal(denominator)).round(2)
+    (BigDecimal(numerator) / BigDecimal(denominator))
   end
 
-  def standard_deviation(range, average)
-    Math.sqrt(range.map do |item|
+  def standard_deviation(data, average)
+    Math.sqrt(data.map do |item|
       (item - average)**2
-    end.sum / range.size).round(2)
+    end.sum / (data.size - 1))
   end
 
   def z_score(average, standard_deviation, data)
