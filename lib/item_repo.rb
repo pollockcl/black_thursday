@@ -7,14 +7,14 @@ class ItemRepo
     @items  = []
     @parent = parent
     DataAnalyst.find_items(csv).each do |attribute|
-      @items << Item.new({ id: attribute[0],
-                           name: attribute[1],
-                           description: attribute[2],
-                           unit_price: attribute[3],
-                           merchant_id: attribute[4],
-                           created_at: attribute[5],
-                           updated_at: attribute[6],
-                           parent: self })
+      @items << Item.new(id: attribute[0],
+                         name: attribute[1],
+                         description: attribute[2],
+                         unit_price: attribute[3],
+                         merchant_id: attribute[4],
+                         created_at: attribute[5],
+                         updated_at: attribute[6],
+                         parent: self)
     end
   end
 
