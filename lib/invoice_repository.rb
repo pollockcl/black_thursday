@@ -42,23 +42,4 @@ class InvoiceRepository
   def find_all_by_status(status)
     @invoices.select { |invoice| invoice.status.downcase == status.downcase }
   end
-
-  # def find_all_with_description(description)
-  #   @invoices.select do |invoice|
-  #     invoice_description = invoice.description.downcase
-  #     invoice_description.include?(description.downcase)
-  #   end
-  # end
-  #
-  # def find_all_by_price(price)
-  #   @invoices.select { |invoice| invoice.unit_price == price }
-  # end
-  #
-  # def find_all_by_price_in_range(range)
-  #   @invoices.select { |invoice| range.include?(invoice.unit_price) }
-  # end
-  #
-  # def find_all_by_merchant_id(merch_id)
-  #   @invoices.select { |invoice| invoice.merchant_id == merch_id }
-  # end
 end
