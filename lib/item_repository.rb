@@ -1,7 +1,7 @@
 require_relative 'item'
 require_relative 'data_analyst'
 # This is the ItemRepo class
-class ItemRepo
+class ItemRepository
   attr_reader :items, :parent
   def initialize(csv, parent)
     @items  = []
@@ -18,12 +18,16 @@ class ItemRepo
     end
   end
 
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
+
   def all
     @items
   end
 
   def find_by_id(id)
-    @items.select { |item| item.id == id.to_s }.first
+    @items.select { |item| item.id == id }.first
   end
 
   def find_by_name(name)
@@ -31,11 +35,11 @@ class ItemRepo
   end
 
   def find_all_with_description(description)
-    @items.select { |item| item.description.include?(description) }
+    @items.select { |item| item.description.casecmp(description).zero? }
   end
 
   def find_all_by_price(price)
-    @items.select { |item| item.unit_price.to_i == price }
+    @items.select { |item| item.unit_price.to_f == price.to_f }
   end
 
   def find_all_by_price_in_range(start, final)
@@ -43,6 +47,6 @@ class ItemRepo
   end
 
   def find_all_by_merchant_id(merch_id)
-    @items.select { |item| item.merchant_id == merch_id.to_s }
+    @items.select { |item| item.merchant_id == merch_id }
   end
 end

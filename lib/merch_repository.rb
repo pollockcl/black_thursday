@@ -2,7 +2,7 @@ require 'csv'
 require_relative './data_analyst'
 require_relative './merchant'
 # This is the MerchRepo class
-class MerchRepo
+class MerchRepository
   attr_reader :merchants, :parent
   def initialize(csv, parent)
     @merchants = []
@@ -14,18 +14,20 @@ class MerchRepo
     end
   end
 
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
+
   def all
     @merchants
   end
 
   def find_by_id(id)
-    result = @merchants.select { |merch| merch.id == id.to_s }
-    result[0]
+    @merchants.select { |merch| merch.id == id }.first
   end
 
   def find_by_name(name)
-    result = @merchants.select { |merch| name.casecmp(merch.name).zero? }
-    result[0]
+    @merchants.select { |merch| name.casecmp(merch.name).zero? }.first
   end
 
   def find_all_by_name(name)
