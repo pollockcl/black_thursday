@@ -37,4 +37,11 @@ class SalesAnalyst
     prices    = inventory.map { |item| item.unit_price.to_i }
     average(prices.sum, inventory.size)
   end
+
+  def average_average_price_per_merchant
+    total = merchants.reduce(0) do |total, merchant|
+      total + average_item_price_for_merchant(merchant.id)
+    end
+    average(total, merchants.size)
+  end
 end
