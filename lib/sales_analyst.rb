@@ -41,26 +41,26 @@ class SalesAnalyst
   end
 
   def average_average_price_per_merchant
-    total = merchants.reduce(0) do |sum, merchant|
+    numerator = merchants.reduce(0) do |sum, merchant|
       sum + average_item_price_for_merchant(merchant.id)
     end
-    average(total, merchants.size)
+    average(numerator, merchants.size)
   end
 
   def average_item_price
-    numerator = items.map{|x| x.unit_price.to_i}.sum
+    numerator = items.map { |item| item.unit_price.to_i }.sum
     average(numerator, items.size)
   end
 
   def average_item_price_standard_deviation
     data = items.map { |item| item.unit_price.to_i }
-    avg = average_item_price
+    avg  = average_item_price
     standard_deviation(data, avg)
   end
 
   def golden_items
     std_deviation = average_item_price_standard_deviation
-    avg = average_item_price
+    avg           = average_item_price
     items.select do |item|
       data = item.unit_price.to_i
       z_score(avg, std_deviation, data) > 2
