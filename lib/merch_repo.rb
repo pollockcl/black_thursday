@@ -31,8 +31,4 @@ class MerchRepo
   def find_all_by_name(name)
     @merchants.select { |merch| merch.name.downcase.include?(name.downcase) }
   end
-
-  def size
-    all.size
-  end
 end

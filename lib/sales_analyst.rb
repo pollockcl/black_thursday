@@ -6,39 +6,64 @@ class SalesAnalyst
   attr_reader :standard_deviation_avg_item_price
   def initialize(sales_engine)
     @sales_engine = sales_engine
-    @standard_deviation_items = average_items_per_merchant_standard_deviation
-    # @standard_deviation_avg_item_price = average_average_item_prices_per_merchant_standard_deviation
+  end
+
+  def items
+    @sales_engine.items.all
+  end
+
+  def merchants
+    @sales_engine.merchants.all
   end
 
   def average_items_per_merchant
-    avg_items_per_merchant(@sales_engine).round(2)
+    average(items.size, merchants.size).round(2)
   end
 
   def average_items_per_merchant_standard_deviation
-    std_deviation_items_per_merchant(@sales_engine).round(2)
+    range = merchants.map { |merch| merch.items.size }
+    standard_deviation(range, average_items_per_merchant).round(2)
   end
 
   def merchants_with_high_item_count
-    @sales_engine.merchants.all.select do |merchant|
-      (merchant.items.size / @standard_deviation_items) > 1
+    std_deviation = average_items_per_merchant_standard_deviation
+    avg           = average_items_per_merchant
+    merchants.select do |merchant|
+      data = merchant.items.size
+      z_score(avg, std_deviation, data) > 1
     end
   end
 
-  def average_item_prices_for_merchant(id)
-    avg_item_price_for_merchant(@sales_engine, id)
+  def average_item_price_for_merchant(merchant_id)
+    inventory = @sales_engine.merchants.find_by_id(merchant_id).items
+    prices    = inventory.map { |item| item.unit_price.to_i }
+    average(prices.sum, inventory.size)
   end
 
-  def average_average_item_prices_per_merchant
-    avg_avg_item_prices_per_merchant(@sales_engine).round(2)
+  def average_average_price_per_merchant
+    numerator = merchants.reduce(0) do |sum, merchant|
+      sum + average_item_price_for_merchant(merchant.id)
+    end
+    average(numerator, merchants.size)
   end
-  #
-  # def average_average_item_prices_per_merchant_standard_deviation
-  #   std_deviation_avg_item_prices_per_merchant(@sales_engine)
-  # end
-  #
-  # def golden_items
-  #   @sales_engine.items.all.select do |item|
-  #     (item.unit_price_to_dollars / @standard_deviation_avg_item_price) > 2
-  #   end
-  # end
+
+  def average_item_price
+    numerator = items.map { |item| item.unit_price.to_i }.sum
+    average(numerator, items.size)
+  end
+
+  def average_item_price_standard_deviation
+    data = items.map { |item| item.unit_price.to_i }
+    avg  = average_item_price
+    standard_deviation(data, avg)
+  end
+
+  def golden_items
+    std_deviation = average_item_price_standard_deviation
+    avg           = average_item_price
+    items.select do |item|
+      data = item.unit_price.to_i
+      z_score(avg, std_deviation, data) > 2
+    end
+  end
 end

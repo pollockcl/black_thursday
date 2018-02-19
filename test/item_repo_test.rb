@@ -14,10 +14,6 @@ class ItemRepoTest < MiniTest::Test
     assert_equal 1367, @ir.all.size
   end
 
-  def test_size
-    assert_equal 1367, @ir.size
-  end
-
   def test_find_by_id
     assert_nil @ir.find_by_id(-1)
     assert_instance_of Item, @ir.find_by_id(263_395_237)

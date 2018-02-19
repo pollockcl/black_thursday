@@ -15,10 +15,6 @@ class MerchRepoTest < MiniTest::Test
     assert_equal 475, @mr.all.size
   end
 
-  def test_size_method
-    assert_equal 475, @mr.size
-  end
-
   def test_find_by_id_method
     assert_instance_of Merchant, @mr.find_by_id(12_334_105)
     assert_nil @mr.find_by_id(-2)
