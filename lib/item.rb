@@ -8,15 +8,15 @@ class Item
               :created_at,
               :updated_at,
               :parent
-  def initialize(hash)
-    @id          = hash[:id]
-    @name        = hash[:name]
-    @description = hash[:description]
-    @unit_price  = hash[:unit_price]
-    @merchant_id = hash[:merchant_id]
-    @created_at  = hash[:created_at]
-    @updated_at  = hash[:updated_at]
-    @parent      = hash[:parent]
+  def initialize(attributes)
+    @id          = attributes[:id]
+    @name        = attributes[:name]
+    @description = attributes[:description]
+    @unit_price  = attributes[:unit_price]
+    @merchant_id = attributes[:merchant_id]
+    @created_at  = attributes[:created_at]
+    @updated_at  = attributes[:updated_at]
+    @parent      = attributes[:parent]
   end
 
   def unit_price_to_dollars
