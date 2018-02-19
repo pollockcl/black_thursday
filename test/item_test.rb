@@ -3,14 +3,25 @@ require './lib/item.rb'
 require 'bigdecimal'
 
 class ItemTest < MiniTest::Test
+  def setup
+    @attributes = { id: 1,
+                    name: 'Pencil',
+                    description: 'You can use it to write things',
+                    unit_price: BigDecimal.new(10.99, 4),
+                    merchant_id:1,
+                    created_at: Time.now,
+                    updated_at: Time.now,
+                    parent: nil}
+  end
+
   def test_existence
-    item = Item.new(1, 'Pencil', 'You can use it to write things', BigDecimal.new(10.99, 4), 1, Time.now, Time.now, nil)
+    item = Item.new(@attributes)
 
     assert_instance_of Item, item
   end
 
   def test_attributes
-    item = Item.new(1, 'Pencil', 'You can use it to write things', BigDecimal.new(10.99, 4), 1, Time.now, Time.now, nil)
+    item = Item.new(@attributes)
 
     assert_equal 'Pencil', item.name
     assert_equal 1, item.id
@@ -19,7 +30,7 @@ class ItemTest < MiniTest::Test
   end
 
   def test_price_to_dollars
-    item = Item.new(1, 'Pencil', 'You can use it to write things', BigDecimal.new(10.99, 4), 1, Time.now, Time.now, nil)
+    item = Item.new(@attributes)
 
     assert_equal 10.99, item.unit_price_to_dollars
   end
