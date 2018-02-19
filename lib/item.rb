@@ -1,6 +1,13 @@
 # This is the Item class
 class Item
-  attr_reader :id, :name, :description, :unit_price, :merchant_id, :created_at, :updated_at, :parent
+  attr_reader :id,
+              :name,
+              :description,
+              :unit_price,
+              :merchant_id,
+              :created_at,
+              :updated_at,
+              :parent
   def initialize(hash)
     @id          = hash[:id]
     @name        = hash[:name]
