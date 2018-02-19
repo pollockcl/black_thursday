@@ -19,8 +19,8 @@ class SalesEngineTest < MiniTest::Test
   def test_has_merch_and_items
     se = SalesEngine.from_csv(@files)
 
-    assert_instance_of ItemRepo, se.items
-    assert_instance_of MerchRepo, se.merchants
+    assert_instance_of ItemRepository, se.items
+    assert_instance_of MerchRepository, se.merchants
   end
 
   def test_items_method
