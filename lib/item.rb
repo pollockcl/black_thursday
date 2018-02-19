@@ -19,7 +19,7 @@ class Item
   end
 
   def unit_price_to_dollars
-    BigDecimal.new(@unit_price).round(2)
+    @unit_price.round(2)
   end
 
   def merchant

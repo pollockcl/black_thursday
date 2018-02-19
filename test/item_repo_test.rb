@@ -1,5 +1,5 @@
 require './test/test_helper'
-require './lib/item_repo'
+require './lib/item_repository'
 class ItemRepoTest < MiniTest::Test
   def setup
     csv = './data/items.csv'

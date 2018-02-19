@@ -1,3 +1,5 @@
+require 'bigdecimal'
+require 'time'
 require_relative 'item'
 require_relative 'data_analyst'
 # This is the ItemRepo class
@@ -10,10 +12,10 @@ class ItemRepository
       @items << Item.new(id:          attribute[0],
                          name:        attribute[1],
                          description: attribute[2],
-                         unit_price:  attribute[3],
+                         unit_price:  BigDecimal(attribute[3].to_i) / 100,
                          merchant_id: attribute[4],
-                         created_at:  attribute[5],
-                         updated_at:  attribute[6],
+                         created_at:  Time.parse(attribute[5]),
+                         updated_at:  Time.parse(attribute[6]),
                          parent: self)
     end
   end
@@ -39,11 +41,11 @@ class ItemRepository
   end
 
   def find_all_by_price(price)
-    @items.select { |item| item.unit_price.to_f == price.to_f }
+    @items.select { |item| item.unit_price == price }
   end
 
-  def find_all_by_price_in_range(start, final)
-    @items.select { |item| item.unit_price.to_i.between?(start, final) }
+  def find_all_by_price_in_range(range)
+    @items.select { |item| range.include?(item.unit_price) }
   end
 
   def find_all_by_merchant_id(merch_id)
