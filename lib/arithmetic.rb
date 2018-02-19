@@ -10,4 +10,8 @@ module Arithmetic
       (item - average)**2
     end.sum / range.size).round(2)
   end
+
+  def z_score(average, standard_deviation, data)
+    (data - average) / standard_deviation
+  end
 end
