@@ -1,7 +1,6 @@
 require_relative 'test_helper'
 require './lib/sales_engine'
 require './lib/sales_analyst'
-
 class SalesAnalystTest < MiniTest::Test
   def setup
     file = { items: './data/items.csv',
