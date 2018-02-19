@@ -44,4 +44,11 @@ class SalesAnalyst
     end
     average(total, merchants.size)
   end
+
+  def golden_items
+    avg   = average_average_price_per_merchant
+    range = merchants.map { |merchant| average_item_price_for_merchant(merchant.id) }
+    std_deviation = standard_deviation(range, avg)
+    merchants.select{ |merchant| ((merchant.items.unit_price - avg) / std_deviation) > 2 }
+  end
 end
