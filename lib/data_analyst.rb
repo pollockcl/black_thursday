@@ -17,4 +17,14 @@ class DataAnalyst
      csv['created_at'],
      csv['updated_at']].transpose
   end
+
+  def self.find_invoices(file)
+    csv = CSV.read(file, headers: true)
+    [csv['id'],
+     csv['customer_id'],
+     csv['merchant_id'],
+     csv['status'],
+     csv['created_at'],
+     csv['updated_at']].transpose
+  end
 end
