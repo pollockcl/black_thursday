@@ -21,12 +21,11 @@ class SalesAnalystTest < MiniTest::Test
     assert_equal 2.88, sa.average_items_per_merchant
   end
 
-  # def test_standard_deviation_items_per_merchant
-  #   skip
-  #   sa = SalesAnalyst.new(@se)
+  def test_standard_deviation_items_per_merchant
+    sa = SalesAnalyst.new(@se)
 
-  #   assert_equal 3.26, sa.average_items_per_merchant_standard_deviation
-  # end
+    assert_equal 3.26, sa.average_items_per_merchant_standard_deviation
+  end
 
   # def test_merchants_with_high_item_count_method
   #   skip
