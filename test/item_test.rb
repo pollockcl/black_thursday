@@ -11,7 +11,7 @@ class ItemTest < MiniTest::Test
                     merchant_id:1,
                     created_at: Time.now,
                     updated_at: Time.now,
-                    parent: nil}
+                    parent: nil }
   end
 
   def test_existence
