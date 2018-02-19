@@ -16,6 +16,10 @@ class SalesAnalyst
     @sales_engine.merchants.all
   end
 
+  def invoices
+    @sales_engine.invoices.all
+  end
+
   def average_items_per_merchant
     average(items.size, merchants.size).to_f.round(2)
   end
@@ -65,5 +69,9 @@ class SalesAnalyst
       data = item.unit_price.to_i
       z_score(avg, std_deviation, data) > 2
     end
+  end
+
+  def average_invoice_per_merchant
+    average(invoices.size, merchants.size)
   end
 end
