@@ -45,14 +45,11 @@ class SalesAnalystTest < MiniTest::Test
     assert_equal 1_500, actual_2
   end
 
-  # # methods below need to be checked
-  # def test_sum_average_item_prices_for_all_merchants
-  #   skip # moved this method to arithmatic
-  #   sa = SalesAnalyst.new(@se)
+  def test_sum_average_item_prices_for_all_merchants
+    sa = SalesAnalyst.new(@se)
 
-  #   assert_instance_of BigDecimal, sa.sum_average_item_prices_all_merchants
-  #   # need more precise test using fixture
-  # end
+    assert_instance_of BigDecimal, sa.average_average_price_per_merchant
+  end
 
   # def test_average_average_prices_per_merchant
   #   skip
