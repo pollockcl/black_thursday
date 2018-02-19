@@ -37,7 +37,10 @@ class ItemRepository
   end
 
   def find_all_with_description(description)
-    @items.select { |item| item.description.casecmp(description).zero? }
+    @items.select do |item|
+      item_description = item.description.downcase
+      item_description.include?(description.downcase)
+    end
   end
 
   def find_all_by_price(price)
