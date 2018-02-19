@@ -35,32 +35,15 @@ class SalesAnalystTest < MiniTest::Test
     assert_equal 52, sa.merchants_with_high_item_count.size
   end
 
-  # def test_total_units_for_merchant_method
-  #   skip # moved this method to arithmatic
-  #   sa = SalesAnalyst.new(@se)
+  def test_average_item_price_for_merchant_method
+    sa = SalesAnalyst.new(@se)
+    actual_1 = sa.average_item_price_for_merchant(12334105).round(2)
+    actual_2 = sa.average_item_price_for_merchant(12334112).round(2)
 
-  #   assert_instance_of BigDecimal, sa.total_units_for_merchant(12_334_105)
-  #   assert_equal 3, sa.total_units_for_merchant(12_334_105)
-  # end
-
-  # def test_sum_unit_prices_for_merchant_method
-  #   skip # moved this method to arithmatic
-  #   sa = SalesAnalyst.new(@se)
-
-  #   assert_instance_of BigDecimal, sa.sum_unit_prices_for_merchant(12_334_105)
-  #   assert_equal 4_997, sa.sum_unit_prices_for_merchant(12_334_105)
-  # end
-
-  # def test_average_item_price_for_merchant_method
-  #   skip
-  #   sa = SalesAnalyst.new(@se)
-  #   actual_1 = sa.average_item_prices_for_merchant(12_334_105).round(2)
-  #   actual_2 = sa.average_item_prices_for_merchant(12_334_112).round(2)
-
-  #   assert_instance_of BigDecimal, actual_1
-  #   assert_equal 1_665.67, actual_1
-  #   assert_equal 1_500, actual_2
-  # end
+    assert_instance_of BigDecimal, actual_1
+    assert_equal 1_665.67, actual_1
+    assert_equal 1_500, actual_2
+  end
 
   # # methods below need to be checked
   # def test_sum_average_item_prices_for_all_merchants
