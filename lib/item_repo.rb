@@ -7,7 +7,14 @@ class ItemRepo
     @items  = []
     @parent = parent
     DataAnalyst.find_items(csv).each do |item|
-      @items << Item.new(item[0], item[1], item[2], item[3], item[4], item[5], item[6], self)
+      @items << Item.new(item[0],
+                         item[1],
+                         item[2],
+                         item[3],
+                         item[4],
+                         item[5],
+                         item[6],
+                         self)
     end
   end
 
@@ -16,14 +23,11 @@ class ItemRepo
   end
 
   def find_by_id(id)
-    id = id.to_s unless id.is_a?(String)
-    result = @items.select { |item| item.id == id }
-    result[0]
+    @items.select { |item| item.id == id.to_s }.first
   end
 
   def find_by_name(name)
-    result = @items.select { |item| item.name == name }
-    result[0]
+    @items.select { |item| item.name == name }.first
   end
 
   def find_all_with_description(description)
@@ -39,8 +43,7 @@ class ItemRepo
   end
 
   def find_all_by_merchant_id(merch_id)
-    merch_id = merch_id.to_s unless merch_id.is_a?(String)
-    @items.select { |item| item.merchant_id == merch_id }
+    @items.select { |item| item.merchant_id == merch_id.to_s }
   end
 
   def size
