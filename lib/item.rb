@@ -6,8 +6,7 @@ class Item
               :unit_price,
               :merchant_id,
               :created_at,
-              :updated_at,
-              :parent
+              :updated_at
   def initialize(attributes)
     @id          = attributes[:id]
     @name        = attributes[:name]
