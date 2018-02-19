@@ -6,8 +6,8 @@ require_relative 'data_analyst'
 class InvoiceRepository
   attr_reader :invoices, :parent
   def initialize(csv, parent)
-    @invoices  = []
-    @parent = parent
+    @invoices = []
+    @parent   = parent
     DataAnalyst.find_invoices(csv).each do |attribute|
       @invoices << Invoice.new(id:          attribute[0],
                                customer_id: attribute[1],
@@ -40,6 +40,6 @@ class InvoiceRepository
   end
 
   def find_all_by_status(status)
-    @invoices.select { |invoice| invoice.status.downcase == status.downcase }
+    @invoices.select { |invoice| invoice.status.casecmp(status).zero? }
   end
 end
