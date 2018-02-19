@@ -21,8 +21,14 @@ class SalesAnalyst
   end
 
   def average_items_per_merchant_standard_deviation
-    (Math.sqrt(merchants.map do |merchant|
-      (merchant.items.size - average_items_per_merchant)**2
-    end.sum / merchants.size)).round(2)
+    standard_deviation(merchants, average_items_per_merchant)
+  end
+
+  def merchants_with_high_item_count
+    std_deviation = average_items_per_merchant_standard_deviation
+    avg           = average_items_per_merchant
+    merchants.select do |merchant|
+      ((merchant.items.size - avg) / std_deviation) > 1
+    end
   end
 end
