@@ -13,7 +13,6 @@ class InvoiceRepository
                                customer_id: attribute[1],
                                merchant_id: attribute[2],
                                status:      BigDecimal(attribute[3].to_i) / 100,
-                               merchant_id: attribute[4],
                                created_at:  Time.parse(attribute[5]),
                                updated_at:  Time.parse(attribute[6]),
                                parent:      self)
