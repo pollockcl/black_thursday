@@ -7,8 +7,10 @@ class MerchRepo
   def initialize(csv, parent)
     @merchants = []
     @parent    = parent
-    DataAnalyst.find_merchants(csv).each do |item|
-      @merchants << Merchant.new(item[0], item[1], self)
+    DataAnalyst.find_merchants(csv).each do |attribute|
+      @merchants << Merchant.new(id:     attribute[0],
+                                 name:   attribute[1],
+                                 parent: self)
     end
   end
 
