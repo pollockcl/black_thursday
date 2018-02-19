@@ -45,8 +45,4 @@ class ItemRepo
   def find_all_by_merchant_id(merch_id)
     @items.select { |item| item.merchant_id == merch_id.to_s }
   end
-
-  def size
-    all.size
-  end
 end
