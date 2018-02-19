@@ -49,7 +49,21 @@ class SalesAnalystTest < MiniTest::Test
     assert_instance_of Item, @sa.golden_items[0]
   end
 
-  def test_average_invoice_per_merchant_method
-    assert_equal 10.49, @sa.average_invoice_per_merchant
+  def test_average_invoices_per_merchant_method
+    assert_equal 10.49, @sa.average_invoices_per_merchant
+  end
+
+  def test_average_invoices_per_merchant_standard_deviation_method
+    assert_equal 3.29, @sa.average_invoices_per_merchant_standard_deviation
+  end
+
+  def test_top_merchants_by_invoice_count_method
+    assert_instance_of Array, @sa.top_merchants_by_invoice_count
+    assert_instance_of Merchant, @sa.top_merchants_by_invoice_count.first
+  end
+
+  def test_bottom_merchants_by_invoice_count_method
+    assert_instance_of Array, @sa.bottom_merchants_by_invoice_count
+    assert_instance_of Merchant, @sa.bottom_merchants_by_invoice_count.first
   end
 end

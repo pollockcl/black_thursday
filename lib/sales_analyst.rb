@@ -71,7 +71,33 @@ class SalesAnalyst
     end
   end
 
-  def average_invoice_per_merchant
+  def average_invoices_per_merchant
     average(invoices.size, merchants.size)
   end
+
+  def average_invoices_per_merchant_standard_deviation
+    data = merchants.map do |merchant|
+      @sales_engine.invoices.find_all_by_merchant_id(merchant.id).size
+    end
+    standard_deviation(data, average_invoices_per_merchant).round(2)
+  end
+
+  def top_merchants_by_invoice_count
+    std_deviation = average_invoices_per_merchant_standard_deviation
+    avg           = average_invoices_per_merchant
+    merchants.select do |merchant|
+      data = @sales_engine.invoices.find_all_by_merchant_id(merchant.id).size
+      z_score(avg, std_deviation, data) > 2
+    end
+  end
+
+  def bottom_merchants_by_invoice_count
+    std_deviation = average_invoices_per_merchant_standard_deviation
+    avg           = average_invoices_per_merchant
+    merchants.select do |merchant|
+      data = @sales_engine.invoices.find_all_by_merchant_id(merchant.id).size
+      z_score(avg, std_deviation, data) < -2
+    end
+  end
+
 end
