@@ -8,18 +8,18 @@ class Item
               :created_at,
               :updated_at
   def initialize(attributes)
-    @id          = attributes[:id]
+    @id          = attributes[:id].to_i
     @name        = attributes[:name]
     @description = attributes[:description]
     @unit_price  = attributes[:unit_price]
-    @merchant_id = attributes[:merchant_id]
+    @merchant_id = attributes[:merchant_id].to_i
     @created_at  = attributes[:created_at]
     @updated_at  = attributes[:updated_at]
     @parent      = attributes[:parent]
   end
 
   def unit_price_to_dollars
-    BigDecimal.new(@unit_price).round(2)
+    @unit_price.round(2)
   end
 
   def merchant

@@ -1,5 +1,5 @@
 require './test/test_helper'
-require './lib/merch_repo'
+require './lib/merch_repository'
 
 class MerchRepoTest < MiniTest::Test
   def setup

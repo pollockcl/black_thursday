@@ -1,5 +1,5 @@
 require_relative './test_helper'
-require './lib/item.rb'
+require './lib/item'
 require 'bigdecimal'
 
 class ItemTest < MiniTest::Test

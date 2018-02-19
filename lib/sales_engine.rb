@@ -1,5 +1,5 @@
-require_relative './merch_repo'
-require_relative './item_repo'
+require_relative './merch_repository'
+require_relative './item_repository'
 # The SalesEngine class
 class SalesEngine
   attr_reader :merchants, :items
@@ -8,7 +8,7 @@ class SalesEngine
   end
 
   def initialize(hash)
-    @merchants = MerchRepo.new(hash[:merchants], self)
-    @items     = ItemRepo.new(hash[:items], self)
+    @merchants = MerchRepository.new(hash[:merchants], self)
+    @items     = ItemRepository.new(hash[:items], self)
   end
 end

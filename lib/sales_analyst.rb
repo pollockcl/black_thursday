@@ -17,12 +17,12 @@ class SalesAnalyst
   end
 
   def average_items_per_merchant
-    average(items.size, merchants.size).round(2)
+    average(items.size, merchants.size).to_f.round(2)
   end
 
   def average_items_per_merchant_standard_deviation
-    range = merchants.map { |merch| merch.items.size }
-    standard_deviation(range, average_items_per_merchant).round(2)
+    data = merchants.map { |merch| merch.items.size }
+    standard_deviation(data, average_items_per_merchant).round(2)
   end
 
   def merchants_with_high_item_count
@@ -36,8 +36,8 @@ class SalesAnalyst
 
   def average_item_price_for_merchant(merchant_id)
     inventory = @sales_engine.merchants.find_by_id(merchant_id).items
-    prices    = inventory.map { |item| item.unit_price.to_i }
-    average(prices.sum, inventory.size)
+    prices    = inventory.map(&:unit_price)
+    average(prices.reduce(:+), inventory.size)
   end
 
   def average_average_price_per_merchant
@@ -48,7 +48,7 @@ class SalesAnalyst
   end
 
   def average_item_price
-    numerator = items.map { |item| item.unit_price.to_i }.sum
+    numerator = items.map { |item| item.unit_price.to_i }.reduce(:+)
     average(numerator, items.size)
   end
 
