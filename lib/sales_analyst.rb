@@ -99,5 +99,4 @@ class SalesAnalyst
       z_score(avg, std_deviation, data) < -2
     end
   end
-
 end

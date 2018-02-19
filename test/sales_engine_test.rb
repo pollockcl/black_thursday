@@ -4,7 +4,8 @@ require './lib/sales_engine'
 class SalesEngineTest < MiniTest::Test
   def setup
     @files = { items: './data/items.csv',
-               merchants: './data/merchants.csv' }
+               merchants: './data/merchants.csv',
+               invoices: './data/invoices.csv' }
     @se             = SalesEngine.from_csv(@files)
     @merchant_repo  = @se.merchants
     @item_repo      = @se.items
