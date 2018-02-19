@@ -21,7 +21,7 @@ class SalesAnalystTest < MiniTest::Test
     assert_equal 2.88, sa.average_items_per_merchant
   end
 
-  def test_standard_deviation_items_per_merchant
+  def test_average_items_per_merchant_standard_deviation
     sa = SalesAnalyst.new(@se)
 
     assert_equal 3.26, sa.average_items_per_merchant_standard_deviation
@@ -45,34 +45,17 @@ class SalesAnalystTest < MiniTest::Test
     assert_equal 1_500, actual_2
   end
 
-  def test_sum_average_item_prices_for_all_merchants
+  def test_average_average_price_per_merchant_method
     sa = SalesAnalyst.new(@se)
 
     assert_instance_of BigDecimal, sa.average_average_price_per_merchant
   end
 
-  # def test_average_average_prices_per_merchant
-  #   skip
-  #   sa = SalesAnalyst.new(@se)
+  def test_golden_merchants
+    sa = SalesAnalyst.new(@se)
+    actual = sa.golden_items
 
-  #   assert_instance_of BigDecimal, sa.average_average_item_prices_per_merchant
-  #   assert_equal 0, sa.average_average_item_prices_per_merchant
-  #   # need more precise test using fixture
-  # end
-
-  # def test_standard_deviation_average_average_item_prices_per_merchant
-  #   skip
-  #   sa = SalesAnalyst.new(@se)
-  #   actual = sa.standard_deviation_avg_item_price
-
-  #   assert_equal 0, actual
-  # end
-
-  # def test_golden_merchants
-  #   skip
-  #   sa = SalesAnalyst.new(@se)
-  #   actual = sa.golden_items
-
-  #   assert_equal 0, actual.size
-  # end
+    assert_instance_of Array, sa.golden_items
+    assert_equal actual, sa.golden_items
+  end
 end
