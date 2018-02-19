@@ -37,12 +37,12 @@ class SalesAnalystTest < MiniTest::Test
 
   def test_average_item_price_for_merchant_method
     sa = SalesAnalyst.new(@se)
-    actual_1 = sa.average_item_price_for_merchant(12334105).round(2)
-    actual_2 = sa.average_item_price_for_merchant(12334112).round(2)
+    actual1 = sa.average_item_price_for_merchant(12_334_105).round(2)
+    actual2 = sa.average_item_price_for_merchant(12_334_112).round(2)
 
-    assert_instance_of BigDecimal, actual_1
-    assert_equal 1_665.67, actual_1
-    assert_equal 1_500, actual_2
+    assert_instance_of BigDecimal, actual1
+    assert_equal 1_665.67, actual1
+    assert_equal 1_500, actual2
   end
 
   def test_average_average_price_per_merchant_method
@@ -51,11 +51,11 @@ class SalesAnalystTest < MiniTest::Test
     assert_instance_of BigDecimal, sa.average_average_price_per_merchant
   end
 
-  def test_golden_merchants
+  def test_golden_items
     sa = SalesAnalyst.new(@se)
-    actual = sa.golden_items
 
     assert_instance_of Array, sa.golden_items
-    assert_equal actual, sa.golden_items
+    assert_equal 5, sa.golden_items.size
+    assert_instance_of Item, sa.golden_items[0]
   end
 end
