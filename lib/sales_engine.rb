@@ -3,7 +3,7 @@ require_relative './item_repository'
 require_relative './invoice_repository'
 # The SalesEngine class
 class SalesEngine
-  attr_reader :merchants, :items
+  attr_reader :merchants, :items, :invoices
   def self.from_csv(hash)
     SalesEngine.new(hash)
   end
@@ -11,6 +11,6 @@ class SalesEngine
   def initialize(hash)
     @merchants = MerchRepository.new(hash[:merchants], self)
     @items     = ItemRepository.new(hash[:items], self)
-    @invoices  = InvoiceReposition.new(hash[:invoices], self)
+    @invoices  = InvoiceRepository.new(hash[:invoices], self)
   end
 end
