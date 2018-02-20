@@ -46,7 +46,6 @@ class DataAnalyst
      csv['last_name'],
      csv['created_at'],
      csv['updated_at']].transpose
-
   end
 
   def self.find_transactions(file)

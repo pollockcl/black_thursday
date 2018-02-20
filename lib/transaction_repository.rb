@@ -25,5 +25,4 @@ class TransactionRepository
   def find_by_id(id)
     all.detect { |transaction| transaction.id == id }
   end
-
 end
