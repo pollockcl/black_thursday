@@ -20,4 +20,9 @@ class CustomerRepositoryTest < MiniTest::Test
     assert_nil @cr.find_by_id(-1)
     assert_equal 'Nader', @cr.find_by_id(66).last_name
   end
+
+  def test_find_all_by_first_name_method
+    assert_equal [], @cr.find_all_by_first_name('Darth Plagueis the Wise')
+    assert_equal 2, @cr.find_all_by_first_name('Abb').size
+  end
 end

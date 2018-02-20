@@ -21,6 +21,10 @@ class CustomerRepository
   end
 
   def find_by_id(id)
-    @customers.detect{ |customer| customer.id == id }
+    all.detect { |customer| customer.id == id }
+  end
+
+  def find_all_by_first_name(name)
+    all.select { |customer| customer.first_name.include?(name) }
   end
 end
