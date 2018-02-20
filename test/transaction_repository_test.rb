@@ -10,4 +10,13 @@ class TransactionRepositoryTest < MiniTest::Test
   def test_existence
     assert_instance_of TransactionRepository, @tr
   end
+
+  def test_all_method
+    assert_equal 4985, @tr.all.size
+  end
+
+  def test_find_by_id_method
+    assert_nil @tr.find_by_id(-1)
+    assert_equal 'failed', @tr.find_by_id(66).result
+  end
 end
