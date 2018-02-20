@@ -17,4 +17,8 @@ class InvoiceItem
     @updated_at  = attributes[:updated_at]
     @parent      = attributes[:parent]
   end
+
+  def unit_price_to_dollars
+    @unit_price.round(2)
+  end
 end

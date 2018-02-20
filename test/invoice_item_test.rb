@@ -28,4 +28,10 @@ class InvoiceItemTest < MiniTest::Test
     assert_equal 263_519_844, invoice_item.item_id
     assert_equal 10.99, invoice_item.unit_price
   end
+
+  def test_unit_price_to_dollars
+    item = InvoiceItem.new(@attributes)
+
+    assert_equal 10.99, item.unit_price_to_dollars
+  end
 end
