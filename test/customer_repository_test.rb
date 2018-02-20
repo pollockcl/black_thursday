@@ -22,7 +22,12 @@ class CustomerRepositoryTest < MiniTest::Test
   end
 
   def test_find_all_by_first_name_method
-    assert_equal [], @cr.find_all_by_first_name('Darth Plagueis the Wise')
+    assert_equal [], @cr.find_all_by_first_name('Darth')
     assert_equal 2, @cr.find_all_by_first_name('Abb').size
+  end
+
+  def test_find_all_by_last_name
+    assert_equal [], @cr.find_all_by_last_name('Plagueis the Wise')
+    assert_equal 4, @cr.find_all_by_last_name('Abb').size
   end
 end
