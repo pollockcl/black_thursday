@@ -6,7 +6,7 @@ module Arithmetic
   end
 
   def standard_deviation(data, average)
-    Math.sqrt(data.map do |item|
+    Math.sqrt(data.map do |item, _nil|
       (item - average)**2
     end.reduce(:+) / (data.size - 1))
   end

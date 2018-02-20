@@ -100,4 +100,22 @@ class SalesAnalyst
     end
   end
 
+  def average_daily_invoices
+    average(invoices.size, 7)
+  end
+
+  def standard_deviation_daily_invoices
+    avg  = average_daily_invoices
+    data = invoices.group_by(&:weekday_created)
+    data.each_key { |day| data[day] = data[day].size }
+    standard_deviation(data.invert, avg)
+  end
+
+  def top_days_by_invoice_count
+    data = invoices.group_by(&:weekday_created)
+    data.each_key { |day| data[day] = data[day].size }
+    std_deviation = standard_deviation_daily_invoices
+    avg           = average_daily_invoices
+    data.select { |_day, invoice| z_score(avg, std_deviation, invoice) > 1 }.keys
+  end
 end
