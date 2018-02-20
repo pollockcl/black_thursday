@@ -2,9 +2,8 @@ require_relative 'test_helper'
 require_relative '../lib/transaction_repository'
 class TransactionRepositoryTest < MiniTest::Test
   def setup
-    @tr  = TransactionRepository.new
-    @csv = './data/transactions.csv'
-    @tr.from_csv(@csv)
+    @file = './data/transactions.csv'
+    @tr = TransactionRepository.new(@file, nil)
   end
 
   def test_existence

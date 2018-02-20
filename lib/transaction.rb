@@ -7,14 +7,14 @@ class Transaction
               :result,
               :created_at,
               :updated_at
-  def initialize(hash)
-    @id                          = hash[:id]
-    @invoice_id                  = hash[:iid]
-    @credit_card_number          = hash[:ccn]
-    @credit_card_expiration_date = hash[:ccne]
-    @result                      = hash[:result]
-    @created_at                  = hash[:created]
-    @updated_at                  = hash[:updated]
-    @parent                      = hash[:parent]
+  def initialize(attributes)
+    @id                          = attributes[:id]
+    @invoice_id                  = attributes[:iid]
+    @credit_card_number          = attributes[:ccn]
+    @credit_card_expiration_date = attributes[:ccne]
+    @result                      = attributes[:result]
+    @created_at                  = attributes[:created]
+    @updated_at                  = attributes[:updated]
+    @parent                      = attributes[:parent]
   end
 end

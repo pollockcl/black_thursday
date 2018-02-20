@@ -2,11 +2,10 @@ require_relative 'data_analyst'
 require_relative 'transaction'
 # This is the TransactionRepository class
 class TransactionRepository
-  def initialize
+  attr_reader :transactions, :parent
+  def initialize(csv, parent)
     @transactions = []
-  end
-
-  def from_csv(csv)
+    @parent = parent
     DataAnalyst.find_transactions(csv).each do |attributes|
       @transactions << Transaction.new(id: attributes[0].to_i,
                                        iid: attributes[1].to_i,
@@ -14,7 +13,8 @@ class TransactionRepository
                                        ccne:       attributes[3].to_i,
                                        result:     attributes[4],
                                        created:    Time.parse(attributes[5]),
-                                       updated:    Time.parse(attributes[6]))
+                                       updated:    Time.parse(attributes[6]),
+                                       parent:     self)
     end
   end
 
