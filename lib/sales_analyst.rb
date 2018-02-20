@@ -100,4 +100,7 @@ class SalesAnalyst
     end
   end
 
+  def average_daily_invoices
+    average(invoices.size, 7)
+  end
 end
