@@ -11,7 +11,7 @@ module Arithmetic
     end.reduce(:+) / (data.size - 1))
   end
 
-  def z_score(average, standard_deviation, data)
+  def z_score(data, average, standard_deviation)
     (data - average) / standard_deviation
   end
 end

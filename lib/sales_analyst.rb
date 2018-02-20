@@ -34,7 +34,7 @@ class SalesAnalyst
     avg           = average_items_per_merchant
     merchants.select do |merchant|
       data = merchant.items.size
-      z_score(avg, std_deviation, data) > 1
+      z_score(data, avg, std_deviation) > 1
     end
   end
 
@@ -67,7 +67,7 @@ class SalesAnalyst
     avg           = average_item_price
     items.select do |item|
       data = item.unit_price.to_i
-      z_score(avg, std_deviation, data) > 2
+      z_score(data, avg, std_deviation) > 2
     end
   end
 
@@ -87,7 +87,7 @@ class SalesAnalyst
     avg           = average_invoices_per_merchant
     merchants.select do |merchant|
       data = @sales_engine.invoices.find_all_by_merchant_id(merchant.id).size
-      z_score(avg, std_deviation, data) > 2
+      z_score(data, avg, std_deviation) > 2
     end
   end
 
@@ -96,7 +96,7 @@ class SalesAnalyst
     avg           = average_invoices_per_merchant
     merchants.select do |merchant|
       data = @sales_engine.invoices.find_all_by_merchant_id(merchant.id).size
-      z_score(avg, std_deviation, data) < -2
+      z_score(data, avg, std_deviation) < -2
     end
   end
 
