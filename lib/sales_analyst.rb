@@ -114,7 +114,7 @@ class SalesAnalyst
 
   def top_days_by_invoice_count
     find_days.select do |_k, invoice|
-      z_score(average_daily_invoices, std_deviation_daily_invoices, invoice) > 1
+      z_score(invoice, average_daily_invoices, std_deviation_daily_invoices) > 1
     end.keys
   end
 
