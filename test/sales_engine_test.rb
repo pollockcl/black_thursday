@@ -49,4 +49,8 @@ class SalesEngineTest < MiniTest::Test
   def test_merchant_invoices_method
     assert_instance_of Invoice, @merchant_repo.all.first.invoices.first
   end
+
+  def test_transaction_invoice_method
+    assert_instance_of Invoice, @trans_repo.all.first.invoice
+  end
 end
