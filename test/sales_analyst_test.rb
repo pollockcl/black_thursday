@@ -1,11 +1,12 @@
 require_relative 'test_helper'
-require './lib/sales_engine'
-require './lib/sales_analyst'
+require_relative '../lib/sales_engine'
+require_relative '../lib/sales_analyst'
 class SalesAnalystTest < MiniTest::Test
   def setup
     file = { items: './data/items.csv',
              merchants: './data/merchants.csv',
-             invoices: './data/invoices.csv' }
+             invoices: './data/invoices.csv',
+             invoice_items: './data/invoice_items.csv' }
 
     @se = SalesEngine.from_csv(file)
     @sa = SalesAnalyst.new(@se)
