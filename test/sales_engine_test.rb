@@ -9,19 +9,17 @@ class SalesEngineTest < MiniTest::Test
     @se             = SalesEngine.from_csv(@files)
     @merchant_repo  = @se.merchants
     @item_repo      = @se.items
+    @inv_repo       = @se.invoices
   end
 
   def test_from_csv_method_and_existance
-    se = SalesEngine.from_csv(@files)
-
-    assert_instance_of SalesEngine, se
+    assert_instance_of SalesEngine, @se
   end
 
-  def test_has_merch_and_items
-    se = SalesEngine.from_csv(@files)
-
-    assert_instance_of ItemRepository, se.items
-    assert_instance_of MerchRepository, se.merchants
+  def test_has_merch_and_items_and_invoices
+    assert_instance_of ItemRepository, @se.items
+    assert_instance_of MerchRepository, @se.merchants
+    assert_instance_of InvoiceRepository, @se.invoices
   end
 
   def test_items_method
@@ -35,5 +33,13 @@ class SalesEngineTest < MiniTest::Test
     item = @item_repo.find_by_id(263_420_195)
 
     assert_equal 'DenesDoorDecor', item.merchant.name
+  end
+
+  def test_invoice_merchant_method
+    assert_instance_of Merchant, @inv_repo.all.first.merchant
+  end
+
+  def test_merchant_invoices_method
+    assert_instance_of Invoice, @merchant_repo.all.first.invoices.first
   end
 end
