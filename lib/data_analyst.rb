@@ -27,7 +27,7 @@ class DataAnalyst
      csv['created_at'],
      csv['updated_at']].transpose
   end
-    
+
   def self.find_invoice_items(file)
     csv = CSV.read(file, headers: true)
     [csv['id'],
@@ -46,5 +46,16 @@ class DataAnalyst
      csv['last_name'],
      csv['created_at'],
      csv['updated_at']].transpose
-  end 
+  end
+
+  def self.find_transactions(file)
+    csv = CSV.read(file, headers: true)
+    [csv['id'],
+     csv['invoice_id'],
+     csv['credit_card_number'],
+     csv['credit_card_number_expiration_date'],
+     csv['result'],
+     csv['created_at'],
+     csv['updated_at']].transpose
+  end
 end
