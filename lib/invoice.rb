@@ -16,7 +16,11 @@ class Invoice
     @parent      = attributes[:parent]
   end
 
+  def merchant
+    @parent.parent.merchants.find_by_id(@merchant_id)
+  end
+
   def weekday_created
-    Time.parse(@created_at).strftime('%A')
+    @created_at.strftime('%A')
   end
 end

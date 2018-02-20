@@ -70,7 +70,7 @@ class SalesAnalyst
   end
 
   def average_invoices_per_merchant
-    average(invoices.size, merchants.size)
+    average(invoices.size, merchants.size).to_f
   end
 
   def net_invoices(merchant_id)
