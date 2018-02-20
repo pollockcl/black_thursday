@@ -8,7 +8,7 @@ class CustomerRepository
 
   def from_csv(csv)
     DataAnalyst.find_customers(csv).each do |attribute|
-      @customers << Customer.new(id:      attribute[0],
+      @customers << Customer.new(id:      attribute[0].to_i,
                                  first:   attribute[1],
                                  last:    attribute[2],
                                  created: attribute[3],
@@ -18,5 +18,9 @@ class CustomerRepository
 
   def all
     @customers
+  end
+
+  def find_by_id(id)
+    @customers.detect{ |customer| customer.id == id }
   end
 end
