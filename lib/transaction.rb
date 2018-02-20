@@ -9,7 +9,7 @@ class Transaction
               :updated_at
   def initialize(hash)
     @id                          = hash[:id]
-    @invoice_id                  = hash[:invoice]
+    @invoice_id                  = hash[:iid]
     @credit_card_number          = hash[:ccn]
     @credit_card_expiration_date = hash[:ccne]
     @result                      = hash[:result]
