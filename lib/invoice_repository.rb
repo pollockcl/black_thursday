@@ -9,10 +9,10 @@ class InvoiceRepository
     @invoices = []
     @parent   = parent
     DataAnalyst.find_invoices(csv).each do |attribute|
-      @invoices << Invoice.new(id:          attribute[0],
-                               customer_id: attribute[1],
-                               merchant_id: attribute[2],
-                               status:      attribute[3],
+      @invoices << Invoice.new(id:          attribute[0].to_i,
+                               customer_id: attribute[1].to_i,
+                               merchant_id: attribute[2].to_i,
+                               status:      attribute[3].to_sym,
                                created_at:  attribute[4],
                                updated_at:  attribute[5],
                                parent:      self)
@@ -40,6 +40,6 @@ class InvoiceRepository
   end
 
   def find_all_by_status(status)
-    @invoices.select { |invoice| invoice.status.casecmp(status).zero? }
+    @invoices.select { |invoice| invoice.status == status }
   end
 end
