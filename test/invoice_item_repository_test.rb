@@ -14,7 +14,23 @@ class InvoiceItemRepositoryTest < MiniTest::Test
   end
 
   def test_all
-    skip
-    assert_equal 4985, @iir.all.size
+    assert_equal 21_830, @iir.all.size
+  end
+
+  def test_find_by_id
+    assert_nil @iir.find_by_id(-1)
+    assert_instance_of InvoiceItem, @iir.find_by_id(2)
+  end
+
+  def test_find_all_by_item_id
+    assert_equal [], @iir.find_all_by_item_id(-1)
+    assert_equal 18, @iir.find_all_by_item_id(263_395_237).size
+    assert_equal 13, @iir.find_all_by_item_id(263_395_721).size
+  end
+
+  def test_find_all_by_invoice_id
+    assert_equal [], @iir.find_all_by_invoice_id(-1)
+    assert_equal 3, @iir.find_all_by_invoice_id(9).size
+    assert_equal 5, @iir.find_all_by_invoice_id(10).size
   end
 end
