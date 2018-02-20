@@ -118,4 +118,9 @@ class SalesAnalyst
     avg           = average_daily_invoices
     data.select { |_day, invoice| z_score(avg, std_deviation, invoice) > 1 }.keys
   end
+
+  def invoice_status(status)
+    data = invoices.select { |invoice| invoice.status == status }.size
+    ((data.to_f / invoices.size) * 100).round(2)
+  end
 end
