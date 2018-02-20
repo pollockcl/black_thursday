@@ -69,6 +69,7 @@ class SalesAnalystTest < MiniTest::Test
 
   def test_top_days_by_invoice_count
     assert_instance_of Array, @sa.top_days_by_invoice_count
+    assert_equal 'Wednesday', @sa.top_days_by_invoice_count.first
   end
 
   def test_invoice_status_method

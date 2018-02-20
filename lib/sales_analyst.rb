@@ -58,27 +58,27 @@ class SalesAnalyst
 
   def average_item_price_standard_deviation
     data = items.map { |item| item.unit_price.to_i }
-    avg  = average_item_price
-    standard_deviation(data, avg)
+    standard_deviation(data, average_item_price)
   end
 
   def golden_items
     std_deviation = average_item_price_standard_deviation
-    avg           = average_item_price
     items.select do |item|
       data = item.unit_price.to_i
-      z_score(data, avg, std_deviation) > 2
+      z_score(data, average_item_price, std_deviation) > 2
     end
   end
 
   def average_invoices_per_merchant
-    average(invoices.size, merchants.size)
+    average(invoices.size, merchants.size).to_f
+  end
+
+  def net_invoices(merchant_id)
+    @sales_engine.invoices.find_all_by_merchant_id(merchant_id).size
   end
 
   def average_invoices_per_merchant_standard_deviation
-    data = merchants.map do |merchant|
-      @sales_engine.invoices.find_all_by_merchant_id(merchant.id).size
-    end
+    data = merchants.map { |merchant| net_invoices(merchant.id) }
     standard_deviation(data, average_invoices_per_merchant).round(2)
   end
 
@@ -86,17 +86,16 @@ class SalesAnalyst
     std_deviation = average_invoices_per_merchant_standard_deviation
     avg           = average_invoices_per_merchant
     merchants.select do |merchant|
-      data = @sales_engine.invoices.find_all_by_merchant_id(merchant.id).size
+      data = net_invoices(merchant.id)
       z_score(data, avg, std_deviation) > 2
     end
   end
 
   def bottom_merchants_by_invoice_count
     std_deviation = average_invoices_per_merchant_standard_deviation
-    avg           = average_invoices_per_merchant
     merchants.select do |merchant|
-      data = @sales_engine.invoices.find_all_by_merchant_id(merchant.id).size
-      z_score(data, avg, std_deviation) < -2
+      data = net_invoices(merchant.id)
+      z_score(data, average_invoices_per_merchant, std_deviation) < -2
     end
   end
 
@@ -104,18 +103,23 @@ class SalesAnalyst
     average(invoices.size, 7)
   end
 
-  def standard_deviation_daily_invoices
-    avg  = average_daily_invoices
+  def find_days
     data = invoices.group_by(&:weekday_created)
     data.each_key { |day| data[day] = data[day].size }
-    standard_deviation(data.invert, avg)
+  end
+
+  def std_deviation_daily_invoices
+    standard_deviation(find_days.invert, average_daily_invoices)
   end
 
   def top_days_by_invoice_count
-    data = invoices.group_by(&:weekday_created)
-    data.each_key { |day| data[day] = data[day].size }
-    std_deviation = standard_deviation_daily_invoices
-    avg           = average_daily_invoices
-    data.select { |_day, invoice| z_score(avg, std_deviation, invoice) > 1 }.keys
+    find_days.select do |_k, invoice|
+      z_score(invoice, average_daily_invoices, std_deviation_daily_invoices) > 1
+    end.keys
+  end
+
+  def invoice_status(status)
+    data = invoices.select { |invoice| invoice.status == status }.size
+    ((data.to_f / invoices.size) * 100).round(2)
   end
 end
