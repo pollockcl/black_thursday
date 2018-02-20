@@ -5,12 +5,12 @@ class Customer
               :last_name,
               :created_at,
               :updated_at
-  def initialize(hash)
-    @id         = hash[:id]
-    @first_name = hash[:first]
-    @last_name  = hash[:last]
-    @created_at = hash[:created]
-    @updated_at = hash[:updated]
-    @parent     = hash[:parent]
+  def initialize(attributes)
+    @id         = attributes[:id]
+    @first_name = attributes[:first]
+    @last_name  = attributes[:last]
+    @created_at = attributes[:created]
+    @updated_at = attributes[:updated]
+    @parent     = attributes[:parent]
   end
 end

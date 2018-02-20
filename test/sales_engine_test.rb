@@ -6,12 +6,16 @@ class SalesEngineTest < MiniTest::Test
     @files = { items:         './data/items.csv',
                merchants:     './data/merchants.csv',
                invoices:      './data/invoices.csv',
-               invoice_items: './data/invoice_items.csv' }
+               invoice_items: './data/invoice_items.csv',
+               transactions: './data/transactions.csv',
+               customers: './data/customers.csv' }
     @se             = SalesEngine.from_csv(@files)
     @merchant_repo  = @se.merchants
     @item_repo      = @se.items
     @inv_repo       = @se.invoices
     @inv_item_repo  = @se.invoice_items
+    @trans_repo     = @se.transactions
+    @cust_repo      = @se.customers
   end
 
   def test_from_csv_method_and_existance

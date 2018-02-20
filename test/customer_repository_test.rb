@@ -2,9 +2,9 @@ require_relative 'test_helper'
 require_relative '../lib/customer_repository'
 class CustomerRepositoryTest < MiniTest::Test
   def setup
-    @cr  = CustomerRepository.new
-    @csv = './data/customers.csv'
-    @cr.from_csv(@csv)
+    @file = './data/customers.csv'
+
+    @cr = CustomerRepository.new(@file, nil)
   end
 
   def test_existence
