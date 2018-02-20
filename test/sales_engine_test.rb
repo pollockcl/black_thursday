@@ -3,23 +3,26 @@ require './test/test_helper'
 require './lib/sales_engine'
 class SalesEngineTest < MiniTest::Test
   def setup
-    @files = { items: './data/items.csv',
-               merchants: './data/merchants.csv',
-               invoices: './data/invoices.csv' }
+    @files = { items:         './data/items.csv',
+               merchants:     './data/merchants.csv',
+               invoices:      './data/invoices.csv',
+               invoice_items: './data/invoice_items.csv'}
     @se             = SalesEngine.from_csv(@files)
     @merchant_repo  = @se.merchants
     @item_repo      = @se.items
     @inv_repo       = @se.invoices
+    @inv_item_repo  = @se.invoice_items
   end
 
   def test_from_csv_method_and_existance
     assert_instance_of SalesEngine, @se
   end
 
-  def test_has_merch_and_items_and_invoices
+  def test_has_merch_and_items_and_invoices_and_invoice_items
     assert_instance_of ItemRepository, @se.items
     assert_instance_of MerchRepository, @se.merchants
     assert_instance_of InvoiceRepository, @se.invoices
+    assert_instance_of InvoiceItemRepository, @se.invoice_items
   end
 
   def test_items_method
