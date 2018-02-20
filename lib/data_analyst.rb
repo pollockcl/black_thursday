@@ -27,4 +27,13 @@ class DataAnalyst
      csv['created_at'],
      csv['updated_at']].transpose
   end
+
+  def self.find_customers(file)
+    csv = CSV.read(file, headers: true)
+    [csv['id'],
+     csv['first_name'],
+     csv['last_name'],
+     csv['created_at'],
+     csv['updated_at']].transpose
+  end
 end
