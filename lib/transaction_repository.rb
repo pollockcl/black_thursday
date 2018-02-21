@@ -41,9 +41,4 @@ class TransactionRepository
   def find_all_by_result(result)
     all.select { |transaction| transaction.result == result }
   end
-
-  def credit_card_expiration_date
-    credit_card_expiration_date
-  end
-
 end
