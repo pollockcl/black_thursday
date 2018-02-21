@@ -18,4 +18,9 @@ class TransactionRepositoryTest < MiniTest::Test
     assert_nil @tr.find_by_id(-1)
     assert_equal 'failed', @tr.find_by_id(66).result
   end
+
+  def test_find_by_invoice_id_method
+    assert_nil @tr.find_by_invoice_id(-2).first
+    assert_equal 2, @tr.find_by_invoice_id(1).size
+  end
 end
