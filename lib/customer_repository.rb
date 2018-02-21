@@ -10,8 +10,8 @@ class CustomerRepository
       @customers << Customer.new(id:      attribute[0].to_i,
                                  first:   attribute[1],
                                  last:    attribute[2],
-                                 created: attribute[3],
-                                 updated: attribute[4],
+                                 created: Time.parse(attribute[3]),
+                                 updated: Time.parse(attribute[4]),
                                  parent:  self)
     end
   end
@@ -29,10 +29,12 @@ class CustomerRepository
   end
 
   def find_all_by_first_name(name)
-    all.select { |customer| customer.first_name.include?(name) }
+    name = name.downcase
+    all.select { |customer| customer.first_name.downcase.include?(name) }
   end
 
   def find_all_by_last_name(name)
-    all.select { |customer| customer.last_name.include?(name) }
+    name = name.downcase
+    all.select { |customer| customer.last_name.downcase.include?(name) }
   end
 end

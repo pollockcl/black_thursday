@@ -17,23 +17,26 @@ class Invoice
   end
 
   def merchant
-    @parent.parent.merchants.find_by_id(@merchant_id)
+    @parent.parent.merchants.find_by_id(merchant_id)
   end
 
   def weekday_created
-    @created_at.strftime('%A')
+    created_at.strftime('%A')
   end
 
   def items
-    @parent.parent.invoice_items.find_all_by_invoice_id(@id)
+    invoice_items = @parent.parent.invoice_items.find_all_by_invoice_id(id)
+    invoice_items.map do |invoice_item|
+      @parent.parent.items.find_by_id(invoice_item.item_id)
+    end
   end
 
   def transactions
-    @parent.parent.transactions.find_by_invoice_id(@id)
+    @parent.parent.transactions.find_all_by_invoice_id(id)
   end
 
   def customer
-    @parent.parent.customers.find_by_id(@id)
+    @parent.parent.customers.find_by_id(customer_id)
   end
 
   def is_paid_in_full?
@@ -41,7 +44,7 @@ class Invoice
   end
 
   def returned?
-    @status == 'returned'
+    status == 'returned'
   end
 
   def total

@@ -10,7 +10,7 @@ class TransactionRepository
       @transactions << Transaction.new(id: attributes[0].to_i,
                                        iid: attributes[1].to_i,
                                        ccn:        attributes[2].to_i,
-                                       ccne:       attributes[3].to_i,
+                                       ccne:       attributes[3],
                                        result:     attributes[4],
                                        created:    Time.parse(attributes[5]),
                                        updated:    Time.parse(attributes[6]),
@@ -30,7 +30,15 @@ class TransactionRepository
     all.detect { |transaction| transaction.id == id }
   end
 
-  def find_by_invoice_id(id)
+  def find_all_by_invoice_id(id)
     all.select { |transaction| transaction.invoice_id == id }
+  end
+
+  def find_all_by_credit_card_number(number)
+    all.select { |transaction| transaction.credit_card_number == number }
+  end
+
+  def find_all_by_result(result)
+    all.select { |transaction| transaction.result == result }
   end
 end

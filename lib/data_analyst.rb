@@ -53,7 +53,7 @@ class DataAnalyst
     [csv['id'],
      csv['invoice_id'],
      csv['credit_card_number'],
-     csv['credit_card_number_expiration_date'],
+     csv['credit_card_expiration_date'],
      csv['result'],
      csv['created_at'],
      csv['updated_at']].transpose
