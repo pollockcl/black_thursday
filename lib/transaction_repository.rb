@@ -30,7 +30,11 @@ class TransactionRepository
     all.detect { |transaction| transaction.id == id }
   end
 
-  def find_by_invoice_id(id)
+  def find_all_by_invoice_id(id)
     all.select { |transaction| transaction.invoice_id == id }
+  end
+
+  def find_all_by_credit_card_number(number)
+    all.select { |transaction| transaction.credit_card_number == number }
   end
 end
