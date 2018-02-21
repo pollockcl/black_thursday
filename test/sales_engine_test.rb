@@ -49,4 +49,18 @@ class SalesEngineTest < MiniTest::Test
   def test_merchant_invoices_method
     assert_instance_of Invoice, @merchant_repo.all.first.invoices.first
   end
+
+  def test_invoices_items_method
+    assert_instance_of InvoiceItem, @inv_repo.all.first.items[0]
+    assert_equal 8, @inv_repo.all.first.items.size
+  end
+
+  def test_invoices_transaction_method
+    assert_instance_of Transaction, @inv_repo.all.first.transactions.first
+    assert_equal 2, @inv_repo.all.first.transactions.size
+  end
+
+  def test_invoices_customer_method
+    assert_instance_of Customer, @inv_repo.all.first.customer
+  end
 end
