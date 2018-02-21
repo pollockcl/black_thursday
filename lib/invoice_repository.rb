@@ -12,7 +12,7 @@ class InvoiceRepository
       @invoices << Invoice.new(id:          attribute[0].to_i,
                                customer_id: attribute[1].to_i,
                                merchant_id: attribute[2].to_i,
-                               status:      attribute[3].to_sym,
+                               status:      attribute[3],
                                created_at:  Time.parse(attribute[4]),
                                updated_at:  Time.parse(attribute[5]),
                                parent:      self)
