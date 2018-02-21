@@ -35,4 +35,17 @@ class Invoice
   def customer
     @parent.parent.customers.find_by_id(@id)
   end
+
+  def is_paid_in_full?
+    transactions.map { |transaction| transaction.result }.include?('success')
+  end
+
+  def returned?
+    @status == 'returned'
+  end
+
+  def total
+    return 0 if !is_paid_in_full? || returned?
+    items.map { |item| item.quantity * item.unit_price }.reduce(:+)
+  end
 end
