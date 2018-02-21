@@ -10,7 +10,7 @@ class TransactionRepository
       @transactions << Transaction.new(id: attributes[0].to_i,
                                        iid: attributes[1].to_i,
                                        ccn:        attributes[2].to_i,
-                                       ccne:       attributes[3].to_i,
+                                       ccne:       attributes[3],
                                        result:     attributes[4],
                                        created:    Time.parse(attributes[5]),
                                        updated:    Time.parse(attributes[6]),
