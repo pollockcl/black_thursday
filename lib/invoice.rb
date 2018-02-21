@@ -23,4 +23,16 @@ class Invoice
   def weekday_created
     @created_at.strftime('%A')
   end
+
+  def items
+    @parent.parent.invoice_items.find_all_by_invoice_id(@id)
+  end
+
+  def transactions
+    @parent.parent.transactions.find_by_invoice_id(@id)
+  end
+
+  def customer
+    @parent.parent.customers.find_by_id(@id)
+  end
 end
