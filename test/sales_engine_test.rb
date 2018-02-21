@@ -62,5 +62,8 @@ class SalesEngineTest < MiniTest::Test
 
   def test_invoices_customer_method
     assert_instance_of Customer, @inv_repo.all.first.customer
+
+  def test_transaction_invoice_method
+    assert_instance_of Invoice, @trans_repo.all.first.invoice
   end
 end
