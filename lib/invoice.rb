@@ -37,7 +37,7 @@ class Invoice
   end
 
   def is_paid_in_full?
-    transactions.map { |transaction| transaction.result }.include?('success')
+    transactions.map(&:result).include?('success')
   end
 
   def returned?
