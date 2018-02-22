@@ -30,16 +30,16 @@ class SalesEngineTest < MiniTest::Test
   end
 
   def test_items_method
-    merchant = @merchant_repo.find_by_id(12_334_478)
+    merchant = @merchant_repo.find_by_id(204)
 
-    assert_equal 7, merchant.items.size
+    assert_equal 1, merchant.items.size
     assert_instance_of Item, merchant.items[0]
   end
 
   def test_merchants_method
-    item = @item_repo.find_by_id(263_420_195)
+    item = @item_repo.find_by_id(194)
 
-    assert_equal 'DenesDoorDecor', item.merchant.name
+    assert_equal 'FrenchiezShop', item.merchant.name
   end
 
   def test_invoice_merchant_method
@@ -61,17 +61,17 @@ class SalesEngineTest < MiniTest::Test
 
   def test_invoices_transaction_method
     assert_instance_of Transaction, @inv_repo.all.first.transactions.first
-    assert_equal 2, @inv_repo.all.first.transactions.size
+    assert_equal 1, @inv_repo.all.first.transactions.size
   end
 
   def test_invoices_is_paid_in_full_method
     assert @inv_repo.all.first.is_paid_in_full?
-    refute @inv_repo.find_by_id(25).is_paid_in_full?
+    refute @inv_repo.find_by_id(509).is_paid_in_full?
   end
 
   def test_invoices_returned_method
     refute @inv_repo.all.first.returned?
-    assert @inv_repo.find_by_id(25).returned?
+    assert @inv_repo.find_by_id(537).returned?
   end
 
   def test_invoices_total_method

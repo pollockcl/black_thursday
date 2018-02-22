@@ -13,7 +13,7 @@ class CustomerRepositoryTest < MiniTest::Test
 
   def test_all_method
     assert_instance_of Customer, @cr.all.first
-    assert_equal 1_000, @cr.all.size
+    assert_equal 100, @cr.all.size
   end
 
   def test_find_by_id_method
@@ -23,11 +23,11 @@ class CustomerRepositoryTest < MiniTest::Test
 
   def test_find_all_by_first_name_method
     assert_equal [], @cr.find_all_by_first_name('Darth')
-    assert_equal 2, @cr.find_all_by_first_name('Abb').size
+    assert_equal 6, @cr.find_all_by_first_name('As').size
   end
 
   def test_find_all_by_last_name
     assert_equal [], @cr.find_all_by_last_name('Plagueis the Wise')
-    assert_equal 4, @cr.find_all_by_last_name('Abb').size
+    assert_equal 2, @cr.find_all_by_last_name('As').size
   end
 end
