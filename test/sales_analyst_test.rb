@@ -73,9 +73,9 @@ class SalesAnalystTest < MiniTest::Test
   end
 
   def test_invoice_status_method
-    assert_equal 29.29, @sa.invoice_status('pending')
-    assert_equal 62.63, @sa.invoice_status('shipped')
-    assert_equal 8.08,  @sa.invoice_status('returned')
+    assert_equal 29.29, @sa.invoice_status(:pending)
+    assert_equal 62.63, @sa.invoice_status(:shipped)
+    assert_equal 8.08,  @sa.invoice_status(:returned)
   end
 
   def test_std_deviation_daily_invoices_method
@@ -101,5 +101,9 @@ class SalesAnalystTest < MiniTest::Test
 
   def test_merchants_method
     assert_instance_of Merchant, @sa.merchants.first
+  end
+
+  def test_total_revenue_by_date
+    assert_equal 21067.77, @sa.total_revenue_by_date("2009-02-07")
   end
 end
