@@ -12,11 +12,11 @@ class MerchRepositoryTest < MiniTest::Test
   end
 
   def test_all_method
-    assert_equal 475, @mr.all.size
+    assert_equal 99, @mr.all.size
   end
 
   def test_find_by_id_method
-    assert_instance_of Merchant, @mr.find_by_id(12_334_105)
+    assert_instance_of Merchant, @mr.find_by_id(202)
     assert_nil @mr.find_by_id(-2)
   end
 
@@ -27,8 +27,8 @@ class MerchRepositoryTest < MiniTest::Test
   end
 
   def test_find_all_by_name
-    assert_equal 8, @mr.find_all_by_name('Dar').size
-    assert_equal 8, @mr.find_all_by_name('dar').size
+    assert_equal 4, @mr.find_all_by_name('Dar').size
+    assert_equal 4, @mr.find_all_by_name('dar').size
     assert_equal 0, @mr.find_all_by_name('Darth').size
   end
 end
