@@ -119,7 +119,12 @@ class SalesAnalyst
   end
 
   def invoice_status(status)
-    data = invoices.select { |invoice| invoice.status == status }.size
+    data = invoices.select { |invoice| invoice.status.to_s == status }.size
     ((data.to_f / invoices.size) * 100).round(2)
+  end
+
+  def total_revenue_by_date(date)
+    data = invoices.select { |invoice| invoice.created_at == Time.parse(date) }
+    data.map(&:total).reduce(:+)
   end
 end
