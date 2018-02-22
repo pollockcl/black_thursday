@@ -32,8 +32,8 @@ class InvoiceRepositoryTest < MiniTest::Test
   end
 
   def test_find_all_by_status
-    assert_equal 62, @inv_repo.find_all_by_status('shipped').size
-    assert_equal 29, @inv_repo.find_all_by_status('pending').size
-    assert_equal 8, @inv_repo.find_all_by_status('returned').size
+    assert_equal 62, @inv_repo.find_all_by_status(:shipped).size
+    assert_equal 29, @inv_repo.find_all_by_status(:pending).size
+    assert_equal 8, @inv_repo.find_all_by_status(:returned).size
   end
 end

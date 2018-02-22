@@ -71,7 +71,7 @@ class SalesEngineTest < MiniTest::Test
 
   def test_invoices_returned_method
     refute @inv_repo.all.first.returned?
-    assert @inv_repo.find_by_id(590).returned?
+    assert @inv_repo.find_by_id(537).returned?
   end
 
   def test_invoices_total_method

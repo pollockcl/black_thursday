@@ -48,7 +48,7 @@ class Invoice
   end
 
   def returned?
-    status == 'returned'
+    status == :returned
   end
 
   def total
