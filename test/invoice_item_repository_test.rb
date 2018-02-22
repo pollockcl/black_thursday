@@ -1,6 +1,5 @@
 require_relative 'test_helper'
 require_relative '../lib/invoice_item_repository'
-
 # Tests for the InvoiceItemRepository class
 class InvoiceItemRepositoryTest < MiniTest::Test
   def setup
