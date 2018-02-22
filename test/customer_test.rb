@@ -3,10 +3,10 @@ require_relative '../lib/customer'
 class CustomerTest < MiniTest::Test
   def setup
     @attributes = { id: 6,
-                    first_name: 'Joan',
-                    last_name:  'Clarke',
-                    created_at: Time.now,
-                    updated_at: Time.now,
+                    first: 'Joan',
+                    last:  'Clarke',
+                    created: Time.now,
+                    updated: Time.now,
                     parent:     nil }
   end
 
@@ -14,5 +14,15 @@ class CustomerTest < MiniTest::Test
     customer = Customer.new(@attributes)
 
     assert_instance_of Customer, customer
+  end
+
+  def test_attributes
+    customer = Customer.new(@attributes)
+
+    assert_equal 6, customer.id
+    assert_equal 'Joan', customer.first_name
+    assert_equal 'Clarke', customer.last_name
+    assert_instance_of Time, customer.created_at
+    assert_instance_of Time, customer.updated_at
   end
 end
