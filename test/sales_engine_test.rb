@@ -51,13 +51,29 @@ class SalesEngineTest < MiniTest::Test
   end
 
   def test_invoices_items_method
-    assert_instance_of InvoiceItem, @inv_repo.all.first.items[0]
+    assert_instance_of Item, @inv_repo.all.first.items.first
     assert_equal 8, @inv_repo.all.first.items.size
+  end
+
+  def test_invoices_invoice_items
+    assert_instance_of InvoiceItem, @inv_repo.all.first.invoice_items.first
   end
 
   def test_invoices_transaction_method
     assert_instance_of Transaction, @inv_repo.all.first.transactions.first
     assert_equal 2, @inv_repo.all.first.transactions.size
+  end
+
+  def test_invoices_is_paid_in_full_method
+
+  end
+
+  def test_invoices_returned_method
+
+  end
+
+  def test_invoices_total_method
+
   end
 
   def test_invoices_customer_method
@@ -67,4 +83,5 @@ class SalesEngineTest < MiniTest::Test
   def test_transaction_invoice_method
     assert_instance_of Invoice, @trans_repo.all.first.invoice
   end
+
 end

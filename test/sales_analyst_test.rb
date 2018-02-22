@@ -80,4 +80,29 @@ class SalesAnalystTest < MiniTest::Test
     assert_equal 56.95, @sa.invoice_status('shipped')
     assert_equal 13.5,  @sa.invoice_status('returned')
   end
+
+  def test_std_deviation_daily_invoices_method
+    assert_equal 18.07, @sa.std_deviation_daily_invoices.round(2)
+  end
+
+  def test_find_days_method
+    assert_instance_of Hash, @sa.find_days
+    assert_equal 7, @sa.find_days.size
+  end
+
+  def test_average_daily_invoices
+    assert_equal 712, @sa.average_daily_invoices.to_i
+  end
+
+  def test_invoices_method
+    assert_instance_of Invoice, @sa.invoices.first
+  end
+
+  def test_items_method
+    assert_instance_of Item, @sa.items.first
+  end
+
+  def test_merchants_method
+    assert_instance_of Merchant, @sa.merchants.first
+  end
 end
