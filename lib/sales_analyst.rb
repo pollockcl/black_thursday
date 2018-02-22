@@ -130,7 +130,6 @@ class SalesAnalyst
 
   def top_revenue_earners(size = 20)
     merchants.sort_by do |merchant|
-      # require "pry"; binding.pry
       invs = invoices.select { |invoice| invoice.merchant_id == merchant.id }
       invs.map(&:total).reduce(:+)
     end[-size..-1]
