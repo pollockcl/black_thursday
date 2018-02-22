@@ -24,6 +24,10 @@ class Invoice
     created_at.strftime('%A')
   end
 
+  def invoice_items
+    @parent.parent.invoice_items.find_all_by_invoice_id(id)
+  end
+
   def items
     invoice_items = @parent.parent.invoice_items.find_all_by_invoice_id(id)
     invoice_items.map do |invoice_item|
@@ -49,6 +53,6 @@ class Invoice
 
   def total
     return 0 if !is_paid_in_full? || returned?
-    items.map { |item| item.quantity * item.unit_price }.reduce(:+)
+    invoice_items.map { |item| item.quantity * item.unit_price }.reduce(:+)
   end
 end

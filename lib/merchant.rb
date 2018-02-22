@@ -8,10 +8,17 @@ class Merchant
   end
 
   def items
-    @parent.parent.items.find_all_by_merchant_id(@id)
+    @parent.parent.items.find_all_by_merchant_id(id)
   end
 
   def invoices
-    @parent.parent.invoices.find_all_by_merchant_id(@id)
+    @parent.parent.invoices.find_all_by_merchant_id(id)
+  end
+
+  def customers
+    merchant_invoices = @parent.parent.invoices.find_all_by_merchant_id(id)
+    merchant_invoices.map do |invoice|
+      @parent.parent.customers.find_by_id(invoice.customer_id)
+    end.uniq
   end
 end
