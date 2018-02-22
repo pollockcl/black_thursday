@@ -65,15 +65,17 @@ class SalesEngineTest < MiniTest::Test
   end
 
   def test_invoices_is_paid_in_full_method
-
+    assert @inv_repo.all.first.is_paid_in_full?
+    refute @inv_repo.find_by_id(25).is_paid_in_full?
   end
 
   def test_invoices_returned_method
-
+    refute @inv_repo.all.first.returned?
+    assert @inv_repo.find_by_id(25).returned?
   end
 
   def test_invoices_total_method
-
+    assert_equal 21_067.77, @inv_repo.all.first.total
   end
 
   def test_invoices_customer_method
@@ -84,4 +86,15 @@ class SalesEngineTest < MiniTest::Test
     assert_instance_of Invoice, @trans_repo.all.first.invoice
   end
 
+  def test_merchant_customers_method
+    assert_instance_of Customer, @merchant_repo.all.first.customers.first
+  end
+
+  def test_transaction_repository_find_all_by_result_method
+    assert_instance_of Transaction, @trans_repo.find_all_by_result('success').first
+  end
+
+  def test_transaction_repository_find_all_by_credit_card_number
+    assert_instance_of Transaction, @trans_repo.find_all_by_credit_card_number(4068631943231473).first
+  end
 end
