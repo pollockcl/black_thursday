@@ -127,4 +127,12 @@ class SalesAnalyst
     data = invoices.select { |invoice| invoice.created_at == Time.parse(date) }
     data.map(&:total).reduce(:+)
   end
+
+  def top_revenue_earners(size = 20)
+    merchants.sort_by do |merchant|
+      # require "pry"; binding.pry
+      invs = invoices.select { |invoice| invoice.merchant_id == merchant.id }
+      invs.map(&:total).reduce(:+)
+    end[-size..-1]
+  end
 end

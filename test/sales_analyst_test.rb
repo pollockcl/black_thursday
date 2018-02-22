@@ -127,4 +127,11 @@ class SalesAnalystTest < MiniTest::Test
   def test_total_revenue_by_date
     assert_equal 21067.77, @sa.total_revenue_by_date("2009-02-07")
   end
+
+  def test_top_revenue_earners
+    assert_instance_of Merchant, @sa.top_revenue_earners(5).first
+    assert_equal 5, @sa.top_revenue_earners(5).size
+    assert_equal 7, @sa.top_revenue_earners(7).size
+    assert_equal 20, @sa.top_revenue_earners.size
+  end
 end
