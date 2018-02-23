@@ -124,14 +124,19 @@ class SalesAnalyst
   end
 
   def total_revenue_by_date(date)
-    data = invoices.select { |invoice| invoice.created_at == Time.parse(date) }
+    data = invoices.select { |invoice| invoice.created_at == date }
     data.map(&:total).reduce(:+)
   end
 
   def top_revenue_earners(size = 20)
     merchants.sort_by do |merchant|
-      invs = invoices.select { |invoice| invoice.merchant_id == merchant.id }
-      invs.map(&:total).reduce(:+)
-    end[-size..-1]
+      merchant.invoices.map(&:total).reduce(:+)
+    end[-size..-1].reverse
+  end
+
+  def merchants_with_pending_invoices
+    merchants.reject do |merchant|
+      merchant.invoices.map(&:is_paid_in_full)
+    end
   end
 end
