@@ -52,7 +52,7 @@ class Invoice
   end
 
   def total
-    return 0 if !is_paid_in_full? || returned?
+    return 0 if !is_paid_in_full?
     invoice_items.map { |item| item.quantity * item.unit_price }.reduce(:+)
   end
 end
