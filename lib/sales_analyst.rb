@@ -133,4 +133,10 @@ class SalesAnalyst
       merchant.invoices.map(&:total).reduce(:+)
     end[-size..-1].reverse
   end
+
+  def merchants_with_pending_invoices
+    merchants.select do |merchant|
+      merchant.invoices.map(&:!is_paid_in_full)
+    end  
+  end
 end
