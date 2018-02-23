@@ -128,15 +128,19 @@ class SalesAnalyst
     data.map(&:total).reduce(:+)
   end
 
-  def top_revenue_earners(size = 20)
+  def merchants_ranked_by_revenue
     merchants.sort_by do |merchant|
       merchant.invoices.map(&:total).reduce(:+)
-    end[-size..-1].reverse
+    end.reverse
+  end
+
+  def top_revenue_earners(size = 20)
+    merchants_ranked_by_revenue[0...size]
   end
 
   def merchants_with_pending_invoices
-    merchants.reject do |merchant|
-      merchant.invoices.map(&:is_paid_in_full)
+    merchants.select do |merchant|
+      merchant.invoices.map(&:is_paid_in_full?).include?(false)
     end
   end
 end

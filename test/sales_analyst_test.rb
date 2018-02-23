@@ -108,6 +108,12 @@ class SalesAnalystTest < MiniTest::Test
     assert_equal 21_067.77, @sa.total_revenue_by_date(date)
   end
 
+  def test_merchants_ranked_by_revenue
+    assert_instance_of Merchant, @sa.top_revenue_earners.first
+    assert_equal 235, @sa.top_revenue_earners.first.id
+    assert_equal 224, @sa.top_revenue_earners.last.id
+  end
+
   def test_top_revenue_earners
     assert_instance_of Merchant, @sa.top_revenue_earners(5).first
     assert_equal 5, @sa.top_revenue_earners(5).size
