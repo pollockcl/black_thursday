@@ -135,8 +135,8 @@ class SalesAnalyst
   end
 
   def merchants_with_pending_invoices
-    merchants.select do |merchant|
-      merchant.invoices.map(&:!is_paid_in_full)
-    end  
+    merchants.reject do |merchant|
+      merchant.invoices.map(&:is_paid_in_full)
+    end
   end
 end

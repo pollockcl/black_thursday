@@ -116,7 +116,6 @@ class SalesAnalystTest < MiniTest::Test
   end
 
   def test_merchants_with_pending_invoices
-    skip
     assert_instance_of Merchant, @sa.merchants_with_pending_invoices.first
   end
 end
