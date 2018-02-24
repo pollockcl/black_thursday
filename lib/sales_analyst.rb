@@ -143,4 +143,8 @@ class SalesAnalyst
       merchant.invoices.map(&:is_paid_in_full?).include?(false)
     end
   end
+
+  def merchants_with_only_one_item
+    merchants.select{ |merchant| merchant.items.size == 1 }
+  end
 end
