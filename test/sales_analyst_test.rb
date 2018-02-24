@@ -135,4 +135,8 @@ class SalesAnalystTest < MiniTest::Test
     assert_equal 1, @sa.merchants_with_only_one_item_registered_in_month('June').first.items.size
     assert(@sa.merchants_with_only_one_item_registered_in_month('June').all?{ |instance| instance.is_a?(Merchant) })
   end
+
+  def test_revenue_by_merchant_method
+    assert_equal 2099.16, @sa.revenue_by_merchant(202)
+  end
 end
