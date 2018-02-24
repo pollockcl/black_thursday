@@ -125,8 +125,14 @@ class SalesAnalystTest < MiniTest::Test
     assert_instance_of Merchant, @sa.merchants_with_pending_invoices.first
   end
 
-  def test_merchants_with_only_one_item
+  def test_merchants_with_only_one_item_method
     assert_equal 1, @sa.merchants_with_only_one_item.first.items.size
     assert_equal 1, @sa.merchants_with_only_one_item.last.items.size
+    assert(@sa.merchants_with_only_one_item.all?{ |instance| instance.is_a?(Merchant) })
+  end
+
+  def test_merchants_with_only_one_item_registered_in_month_method
+    assert_equal 1, @sa.merchants_with_only_one_item_registered_in_month('June').first.items.size
+    assert(@sa.merchants_with_only_one_item_registered_in_month('June').all?{ |instance| instance.is_a?(Merchant) })
   end
 end
