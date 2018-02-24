@@ -28,7 +28,7 @@ class InvoiceItemRepositoryTest < MiniTest::Test
 
   def test_find_all_by_invoice_id
     assert_equal [], @iir.find_all_by_invoice_id(-1)
-    assert_equal 8, @iir.find_all_by_invoice_id(501).size
-    assert_equal 4, @iir.find_all_by_invoice_id(502).size
+    assert_equal 1, @iir.find_all_by_invoice_id(501).size
+    assert_equal 1, @iir.find_all_by_invoice_id(502).size
   end
 end
