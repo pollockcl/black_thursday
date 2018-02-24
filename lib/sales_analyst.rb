@@ -147,4 +147,21 @@ class SalesAnalyst
   def merchants_with_only_one_item
     merchants.select{ |merchant| merchant.items.size == 1 }
   end
+
+  def merchants_with_only_one_item_registered_in_month(month)
+    months = { 'January'   => 1,
+               'February'  => 2,
+               'March'     => 3,
+               'April'     => 4,
+               'May'       => 5,
+               'June'      => 6,
+               'July'      => 7,
+               'August'    => 8,
+               'September' => 9,
+               'OCtober'   => 10,
+               'November'  => 11,
+               'December'  => 12 }
+    candidates = merchants.select { |merchant| merchant.created_at.month == months[month] }
+    candidates.select { |merchant| merchant.items.size == 1 }
+  end
 end
