@@ -1,10 +1,11 @@
 # This is the Merchant class
 class Merchant
-  attr_reader :id, :name
+  attr_reader :id, :name, :created_at
   def initialize(attributes)
-    @id     = attributes[:id].to_i
-    @name   = attributes[:name]
-    @parent = attributes[:parent]
+    @id         = attributes[:id].to_i
+    @name       = attributes[:name]
+    @parent     = attributes[:parent]
+    @created_at = attributes[:created]
   end
 
   def items
