@@ -124,4 +124,9 @@ class SalesAnalystTest < MiniTest::Test
   def test_merchants_with_pending_invoices
     assert_instance_of Merchant, @sa.merchants_with_pending_invoices.first
   end
+
+  def test_merchants_with_only_one_item
+    assert_equal 1, @sa.merchants_with_only_one_item.first.items.size
+    assert_equal 1, @sa.merchants_with_only_one_item.last.items.size
+  end
 end
