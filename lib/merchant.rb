@@ -23,32 +23,23 @@ class Merchant
     end.uniq
   end
 
-  # methods below all go to SA#most_sold_items
+  # methods below go to SA#most_sold_items
   def invoice_items
     invoices.map do |invoice|
       @parent.parent.invoice_items.find_all_by_invoice_id(invoice.id)
     end.flatten
   end
 
-  # def invoice_items
-  #   invoices.map do |invoice|
-  #     @parent.parent.invoice_items.select { |ii| ii.invoice_id == invoice.id }
-  #   end.flatten
-  # end
-
   def items_sold
     invoice_items.map { |ii| @parent.parent.items.find_by_id(ii.item_id) }
   end
 
-  # def all_items
-  #   invoice_items.map do |ii|
-  #     items.select { |item| item.id == ii.item_id }
-  #   end.flatten
-  # end
-
   def sales_quantities
     totals = Hash.new(0)
-    invoice_items.each { |ii| totals[ii.item_id] += ii.quantity }
+    invoice_items.each do |ii|
+      next unless @parent.parent.invoices.find_by_id(ii.invoice_id).is_paid_in_full?
+      totals[ii.item_id] += ii.quantity
+    end
     totals
   end
 
