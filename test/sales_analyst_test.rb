@@ -125,12 +125,8 @@ class SalesAnalystTest < MiniTest::Test
     assert_instance_of Merchant, @sa.merchants_with_pending_invoices.first
   end
 
-  # def test_total_item_quantity
-  #   assert_instance_of Hash, @sa.item_quantities_by_merchant(201)
-  #   assert_instance_of Integer, @sa.item_quantities_by_merchant(201)
-  # end
-
   def test_most_sold_items
     assert_instance_of Item, @sa.most_sold_item_for_merchant(201).first
+    assert_equal 1, @sa.most_sold_item_for_merchant(201).size
   end
 end
