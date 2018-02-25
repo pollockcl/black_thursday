@@ -38,8 +38,8 @@ class Merchant
 
   def sales_quantities
     totals = Hash.new(0)
+    next if invoice_pending?(ii.invoice_id)
     invoice_items.each do |ii|
-      next if invoice_pending?(ii.invoice_id)
       totals[ii.item_id] += ii.quantity
     end
     totals
