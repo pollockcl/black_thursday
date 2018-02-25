@@ -7,8 +7,6 @@ class Merchant
     @parent = attributes[:parent]
   end
 
-  
-
   def items
     @parent.parent.items.find_all_by_merchant_id(id)
   end
