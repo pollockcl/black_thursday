@@ -126,8 +126,8 @@ class SalesAnalystTest < MiniTest::Test
   end
 
   def test_total_item_quantity
-    assert_instance_of Hash, @sa.item_quantities
-    assert_instance_of Integer, @sa.item_quantities[101]
+    assert_instance_of Hash, @sa.item_quantities_by_merchant(201)
+    assert_instance_of Integer, @sa.item_quantities_by_merchant(201)
   end
 
   def test_merch_invoice_items_by_quantity
