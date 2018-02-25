@@ -148,33 +148,40 @@ class SalesAnalyst
     end
   end
 
-  def merchant_invoice_items(merch_id)
-    @sales_engine.invoices.find_all_by_merchant_id(merch_id).map do |invoice|
-      invoice_items.select { |ii| ii.invoice_id == invoice.id }
-    end.flatten
-  end
-
-  def quantities_by_merchant(merch_id)
-    totals = Hash.new(0)
-    merchant_invoice_items(merch_id).each { |ii| totals[ii.item_id] += ii.quantity }
-    totals
-  end
-
-  def merchant_items_by_quantity(merch_id)
-    merch_items = merchant_invoice_items(merch_id).map do |ii|
-      items.select { |item| item.id == ii.item_id }
-    end.flatten
-    merch_items.sort_by do |item|
-      quantities_by_merchant(merch_id)[item.id]
-    end
-  end
-
   def most_sold_item_for_merchant(merch_id)
-    items = merchant_items_by_quantity(merch_id)
-    top_quantity = quantities_by_merchant(merch_id)[items.last.id]
-    items.select { |item| quantities_by_merchant(merch_id)[item.id] == top_quantity }
-    require "pry"; binding.pry
+    merchant = @sales_engine.merchants.find_by_id(merch_id)
+    items = merchant.all_items_by_quantity
+    max_quantity = merchant.sales_quantities[items.last.id]
+    items.select { |item| merchant.sales_quantities[item.id] == max_quantity }
   end
+  # def merchant_invoice_items(merch_id)
+  #   @sales_engine.invoices.find_all_by_merchant_id(merch_id).map do |invoice|
+  #     invoice_items.select { |ii| ii.invoice_id == invoice.id }
+  #   end.flatten
+  # end
+
+  # def quantities_by_merchant(merch_id)
+  #   totals = Hash.new(0)
+  #   merchant_invoice_items(merch_id).each { |ii| totals[ii.item_id] += ii.quantity }
+  #   totals
+  # end
+
+  # def merchant_items_by_quantity(merch_id)
+  #   merch_items = merchant_invoice_items(merch_id).map do |ii|
+  #     items.select { |item| item.id == ii.item_id }
+  #   end.flatten
+  #   merch_items.sort_by do |item|
+  #     merchant_item_quantities[item.id]
+  #   end
+  # end
+
+  # def most_sold_item_for_merchant(merch_id)
+  #   merchant = @sales_engine.merchants.find_by_id(merch_id)
+  #   items = merchant.items_sold
+  #   max_quantity = merchant.sales_quantities[items.last.id]
+  #   items.select { |item| merchant.sales_quantities[item.id] == max_quantity }
+  # end
+
   # def item_quantities
   #   totals = Hash.new(0)
   #   invoice_items.each { |ii| totals[ii.item_id] += ii.quantity }
