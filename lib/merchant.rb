@@ -34,10 +34,14 @@ class Merchant
     invoice_items.map { |ii| @parent.parent.items.find_by_id(ii.item_id) }
   end
 
+  def invoice_pending?(invoice_id)
+    !@parent.parent.invoices.find_by_id(invoice_id).is_paid_in_full?
+  end
+
   def sales_quantities
     totals = Hash.new(0)
     invoice_items.each do |ii|
-      next unless @parent.parent.invoices.find_by_id(ii.invoice_id).is_paid_in_full?
+      next if invoice_pending?(ii.invoice_id)
       totals[ii.item_id] += ii.quantity
     end
     totals
