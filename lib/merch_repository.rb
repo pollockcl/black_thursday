@@ -8,8 +8,9 @@ class MerchRepository
     @merchants = []
     @parent    = parent
     DataAnalyst.find_merchants(csv).each do |attribute|
-      @merchants << Merchant.new(id:     attribute[0],
-                                 name:   attribute[1],
+      @merchants << Merchant.new(id:      attribute[0],
+                                 name:    attribute[1],
+                                 created: Time.parse(attribute[2]),
                                  parent: self)
     end
   end

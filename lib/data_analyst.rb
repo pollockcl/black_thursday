@@ -4,7 +4,8 @@ class DataAnalyst
   def self.find_merchants(file)
     csv = CSV.read(file, headers: true)
     [csv['id'],
-     csv['name']].transpose
+     csv['name'],
+     csv['created_at']].transpose
   end
 
   def self.find_items(file)
