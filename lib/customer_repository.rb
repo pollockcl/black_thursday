@@ -6,7 +6,7 @@ class CustomerRepository
   def initialize(csv, parent)
     @customers = []
     @parent = parent
-    DataAnalyst.find_customers(csv).each do |attribute|
+    DataAnalyst.find_attributes(csv).each do |attribute|
       @customers << Customer.new(id:      attribute[0].to_i,
                                  first:   attribute[1],
                                  last:    attribute[2],

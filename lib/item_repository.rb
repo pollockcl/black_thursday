@@ -8,7 +8,7 @@ class ItemRepository
   def initialize(csv, parent)
     @items  = []
     @parent = parent
-    DataAnalyst.find_items(csv).each do |attribute|
+    DataAnalyst.find_attributes(csv).each do |attribute|
       @items << Item.new(id:          attribute[0],
                          name:        attribute[1],
                          description: attribute[2],
