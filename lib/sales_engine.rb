@@ -13,11 +13,11 @@ class SalesEngine
   end
 
   def initialize(hash)
-    @merchants = MerchRepository.new(hash[:merchants], self)
-    @items     = ItemRepository.new(hash[:items], self)
-    @invoices  = InvoiceRepository.new(hash[:invoices], self)
+    @merchants     = MerchRepository.new(hash[:merchants], self)
+    @items         = ItemRepository.new(hash[:items], self)
+    @invoices      = InvoiceRepository.new(hash[:invoices], self)
     @invoice_items = InvoiceItemRepository.new(hash[:invoice_items], self)
-    @transactions = TransactionRepository.new(hash[:transactions], self)
-    @customers = CustomerRepository.new(hash[:customers], self)
+    @transactions  = TransactionRepository.new(hash[:transactions], self)
+    @customers     = CustomerRepository.new(hash[:customers], self)
   end
 end
