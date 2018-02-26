@@ -97,6 +97,12 @@ class SalesEngineTest < MiniTest::Test
     assert_instance_of InvoiceItem, @merchant_repo.all.first.invoice_items.first
   end
 
+  def test_merchant_items_sold_method
+    item = @item_repo.find_all_by_merchant_id(@merchant_repo.all.first.id)
+    assert_instance_of Item, @merchant_repo.all.first.items_sold.first
+    assert_equal item, @merchant_repo.all.first.items_sold
+  end
+
   def test_transaction_repository_find_all_by_result_method
     assert_instance_of Transaction, @trans_repo.find_all_by_result('success').first
   end
