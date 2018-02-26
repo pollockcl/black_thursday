@@ -154,4 +154,18 @@ class SalesAnalyst
     max_quantity = merchant.sales_quantities[items.last.id]
     items.select { |item| merchant.sales_quantities[item.id] == max_quantity }
   end
+
+  def merchants_with_only_one_item
+    merchants.select{ |merchant| merchant.items.size == 1 }
+  end
+
+  def merchants_with_only_one_item_registered_in_month(month)
+    candidates = merchants.select { |merchant| merchant.created_at.strftime('%B') == month }
+    candidates.select { |merchant| merchant.items.size == 1 }
+  end
+
+  def revenue_by_merchant(id)
+    merchant = @sales_engine.merchants.find_by_id(id)
+    merchant.invoices.map(&:total).reduce(:+)
+  end
 end
