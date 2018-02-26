@@ -5,7 +5,7 @@ module MerchantAnalyst
   end
 
   def average_items_per_merchant_standard_deviation
-    data = merchants.map { |merch| merch.items.size }
+    data = merchants.map { |merchant| merchant.items.size }
     standard_deviation(data, average_items_per_merchant).round(2)
   end
 
@@ -36,8 +36,8 @@ module MerchantAnalyst
   end
 
   def most_sold_item_for_merchant(merch_id)
-    merchant = @sales_engine.merchants.find_by_id(merch_id)
-    items = merchant.all_items_by_quantity
+    merchant     = @sales_engine.merchants.find_by_id(merch_id)
+    items        = merchant.all_items_by_quantity
     max_quantity = merchant.sales_quantities[items.last.id]
     items.select { |item| merchant.sales_quantities[item.id] == max_quantity }
   end
@@ -47,7 +47,9 @@ module MerchantAnalyst
   end
 
   def merchants_with_only_one_item_registered_in_month(month)
-    candidates = merchants.select { |merchant| merchant.created_at.strftime('%B') == month }
+    candidates = merchants.select do |merchant|
+      merchant.created_at.strftime('%B') == month
+    end
     candidates.select { |merchant| merchant.items.size == 1 }
   end
 
