@@ -176,7 +176,7 @@ class SalesAnalyst
     top = invoice_items.max_by do |ii|
       ii.unit_price * merchant.sales_quantities[ii.item_id]
     end
-    
+
     @sales_engine.items.find_by_id(top.item_id)
   end
 end
