@@ -168,4 +168,15 @@ class SalesAnalyst
     merchant = @sales_engine.merchants.find_by_id(id)
     merchant.invoices.map(&:total).reduce(:+)
   end
+
+  def best_item_for_merchant(id)
+    merchant      = @sales_engine.merchants.find_by_id(id)
+    invoice_items = merchant.invoice_items
+
+    top = invoice_items.max_by do |ii|
+      ii.unit_price * merchant.sales_quantities[ii.item_id]
+    end
+
+    @sales_engine.items.find_by_id(top.item_id)
+  end
 end
