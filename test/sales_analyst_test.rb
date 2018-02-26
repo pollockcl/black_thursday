@@ -144,4 +144,8 @@ class SalesAnalystTest < MiniTest::Test
   def test_revenue_by_merchant_method
     assert_equal 2099.16, @sa.revenue_by_merchant(202)
   end
+
+  def test_best_item_method
+    assert_equal 104, @sa.best_item_for_merchant(204).id
+  end
 end
