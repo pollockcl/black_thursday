@@ -36,10 +36,6 @@ class Merchant
     !@parent.parent.invoices.find_by_id(invoice_id).is_paid_in_full?
   end
 
-  def returned?(invoice_id)
-    !@parent.parent.invoices.find_by_id(invoice_id).status == 'returned'
-  end
-
   def sales_quantities
     totals = Hash.new(0)
     invoice_items.each do |ii|
