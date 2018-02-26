@@ -22,7 +22,6 @@ class Merchant
     end.uniq
   end
 
-  # methods below go to SA#most_sold_items
   def invoice_items
     invoices.map do |invoice|
       @parent.parent.invoice_items.find_all_by_invoice_id(invoice.id)
@@ -35,6 +34,10 @@ class Merchant
 
   def invoice_pending?(invoice_id)
     !@parent.parent.invoices.find_by_id(invoice_id).is_paid_in_full?
+  end
+
+  def returned?(invoice_id)
+    !@parent.parent.invoices.find_by_id(invoice_id).status == 'returned'
   end
 
   def sales_quantities
