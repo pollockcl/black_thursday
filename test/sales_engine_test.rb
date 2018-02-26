@@ -91,7 +91,11 @@ class SalesEngineTest < MiniTest::Test
 
   def test_merchant_invoices_method
     assert_instance_of Invoice, @merchant_repo.all.first.invoices.first
-  end  
+  end
+
+  def test_merchant_invoice_items
+    assert_instance_of InvoiceItem, @merchant_repo.all.first.invoice_items.first
+  end
 
   def test_transaction_repository_find_all_by_result_method
     assert_instance_of Transaction, @trans_repo.find_all_by_result('success').first
