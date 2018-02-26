@@ -98,9 +98,24 @@ class SalesEngineTest < MiniTest::Test
   end
 
   def test_merchant_items_sold_method
-    item = @item_repo.find_all_by_merchant_id(@merchant_repo.all.first.id)
+    item = @item_repo.find_all_by_merchant_id(@merchant_repo.all.first.id).first
     assert_instance_of Item, @merchant_repo.all.first.items_sold.first
-    assert_equal item, @merchant_repo.all.first.items_sold
+    assert_equal item, @merchant_repo.all.first.items_sold.first
+  end
+
+  def test_merchant_invoice_pending_method
+    refute @merchant_repo.all.first.invoice_pending?(501)
+    assert @merchant_repo.all.first.invoice_pending?(509)
+  end
+
+  def test_merchant_sales_quantities
+    assert_instance_of Hash, @merchant_repo.all.first.sales_quantities
+    assert_equal 5, @merchant_repo.all.first.sales_quantities[101]
+  end
+
+  def test_merchant_all_items_by_quantity
+    item = @item_repo.find_all_by_merchant_id(@merchant_repo.all.first.id).first
+    assert_equal item, @merchant_repo.all.first.all_items_by_quantity.first
   end
 
   def test_transaction_repository_find_all_by_result_method
