@@ -20,6 +20,10 @@ class SalesAnalyst
     @sales_engine.invoices.all
   end
 
+  def invoice_items
+    @sales_engine.invoice_items.all
+  end
+
   def average_items_per_merchant
     average(items.size, merchants.size).to_f.round(2)
   end
@@ -142,6 +146,13 @@ class SalesAnalyst
     merchants.select do |merchant|
       merchant.invoices.map(&:is_paid_in_full?).include?(false)
     end
+  end
+
+  def most_sold_item_for_merchant(merch_id)
+    merchant = @sales_engine.merchants.find_by_id(merch_id)
+    items = merchant.all_items_by_quantity
+    max_quantity = merchant.sales_quantities[items.last.id]
+    items.select { |item| merchant.sales_quantities[item.id] == max_quantity }
   end
 
   def merchants_with_only_one_item
