@@ -43,7 +43,7 @@ module MerchantAnalyst
   end
 
   def merchants_with_only_one_item
-    merchants.select{ |merchant| merchant.items.size == 1 }
+    merchants.select { |merchant| merchant.items.size == 1 }
   end
 
   def merchants_with_only_one_item_registered_in_month(month)
