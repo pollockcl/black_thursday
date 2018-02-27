@@ -1,13 +1,13 @@
 require 'csv'
-require_relative './data_analyst'
-require_relative './merchant'
+require_relative 'factory'
+require_relative 'merchant'
 # This is the MerchRepo class
 class MerchRepository
   attr_reader :merchants, :parent
   def initialize(csv, parent)
     @merchants = []
     @parent    = parent
-    DataAnalyst.find_attributes(csv).each do |attribute|
+    Factory.find_attributes(csv).each do |attribute|
       @merchants << Merchant.new(id:      attribute[0],
                                  name:    attribute[1],
                                  created: Time.parse(attribute[2]),

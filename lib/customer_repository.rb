@@ -1,19 +1,16 @@
 require_relative 'customer'
-require_relative 'data_analyst'
+require_relative 'factory'
 # This is the CustomerRepository class
 class CustomerRepository
   attr_reader :customers, :parent
-  def initialize(csv, parent)
-    @customers = []
-    @parent = parent
-    DataAnalyst.find_attributes(csv).each do |attribute|
-      @customers << Customer.new(id:      attribute[0].to_i,
-                                 first:   attribute[1],
-                                 last:    attribute[2],
-                                 created: Time.parse(attribute[3]),
-                                 updated: Time.parse(attribute[4]),
-                                 parent:  self)
-    end
+  def initialize(customers, parent)
+    @customers = customers
+    @parent    = parent
+  end
+
+  def self.from_csv(csv, parent)
+    customers = Factory.create_customers(csv, self)
+    CustomerRepository.new(customers, parent)
   end
 
   def inspect

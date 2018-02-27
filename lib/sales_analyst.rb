@@ -3,7 +3,7 @@ require 'bigdecimal'
 # This is the SalesAnalyst class
 class SalesAnalyst
   include Arithmetic
-  attr_reader :standard_deviation_avg_item_price
+
   def initialize(sales_engine)
     @sales_engine = sales_engine
   end
@@ -30,10 +30,18 @@ class SalesAnalyst
   end
 
   def average_items_per_merchant
+    @average_items_per_merchant ||= calc_avg_items_per_merchant
+  end
+
+  def calc_avg_items_per_merchant
     average(items.size, merchants.size).to_f.round(2)
   end
 
   def average_items_per_merchant_standard_deviation
+    average_items_per_merchant_standard_deviation ||= calc_avg_items_std_dev
+  end
+
+  def calc_avg_items_std_dev
     data = merchants.map { |merchant| merchant.items.size }
     standard_deviation(data, average_items_per_merchant).round(2)
   end
@@ -61,6 +69,10 @@ class SalesAnalyst
   end
 
   def average_invoices_per_merchant
+    @average_invoices_per_merchant ||= avg_invs_per_merch
+  end
+
+  def avg_invs_per_merch
     average(invoices.size, merchants.size).to_f
   end
 
