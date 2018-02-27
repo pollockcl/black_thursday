@@ -8,7 +8,7 @@ class InvoiceRepository
   def initialize(csv, parent)
     @invoices = []
     @parent   = parent
-    DataAnalyst.find_invoices(csv).each do |attribute|
+    DataAnalyst.find_attributes(csv).each do |attribute|
       @invoices << Invoice.new(id:          attribute[0].to_i,
                                customer_id: attribute[1].to_i,
                                merchant_id: attribute[2].to_i,

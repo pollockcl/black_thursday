@@ -8,7 +8,7 @@ class InvoiceItemRepository
   def initialize(csv, parent)
     @invoice_items = []
     @parent        = parent
-    DataAnalyst.find_invoice_items(csv).each do |attribute|
+    DataAnalyst.find_attributes(csv).each do |attribute|
       @invoice_items << InvoiceItem.new(id:          attribute[0].to_i,
                                         item_id:     attribute[1].to_i,
                                         invoice_id:  attribute[2].to_i,
