@@ -6,7 +6,7 @@ class TransactionRepository
   def initialize(csv, parent)
     @transactions = []
     @parent = parent
-    DataAnalyst.find_transactions(csv).each do |attributes|
+    DataAnalyst.find_attributes(csv).each do |attributes|
       @transactions << Transaction.new(id: attributes[0].to_i,
                                        iid: attributes[1].to_i,
                                        ccn:        attributes[2].to_i,
