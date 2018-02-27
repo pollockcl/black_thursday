@@ -1,14 +1,14 @@
 require 'bigdecimal'
 require 'time'
 require_relative 'item'
-require_relative 'data_analyst'
+require_relative 'factory'
 # This is the ItemRepo class
 class ItemRepository
   attr_reader :items, :parent
   def initialize(csv, parent)
     @items  = []
     @parent = parent
-    DataAnalyst.find_items(csv).each do |attribute|
+    Factory.find_attributes(csv).each do |attribute|
       @items << Item.new(id:          attribute[0],
                          name:        attribute[1],
                          description: attribute[2],
