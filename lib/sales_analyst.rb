@@ -38,7 +38,7 @@ class SalesAnalyst
 
   def average_items_per_merchant_standard_deviation
     @average_items_per_merchant_standard_deviation ||=
-    calc_avg_items_per_merch_stdev
+      calc_avg_items_per_merch_stdev
   end
 
   def calc_avg_items_per_merch_stdev
@@ -136,7 +136,7 @@ class SalesAnalyst
 
   def average_invoices_per_merchant_standard_deviation
     @average_invoices_per_merchant_standard_deviation ||=
-    calc_avg_inv_per_merch_stdev
+      calc_avg_inv_per_merch_stdev
   end
 
   def calc_avg_inv_per_merch_stdev
