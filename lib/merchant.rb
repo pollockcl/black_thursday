@@ -23,12 +23,20 @@ class Merchant
   end
 
   def invoice_items
+    @invoice_items ||= calc_inv_items
+  end
+
+  def calc_inv_items
     invoices.map do |invoice|
       @parent.parent.invoice_items.find_all_by_invoice_id(invoice.id)
     end.flatten
   end
 
   def items_sold
+    @items_sold ||= calc_items_sold
+  end
+
+  def calc_items_sold
     invoice_items.map { |ii| @parent.parent.items.find_by_id(ii.item_id) }
   end
 
@@ -37,6 +45,10 @@ class Merchant
   end
 
   def sales_quantities
+    @sales_quantities ||= calc_sales_quantities
+  end
+
+  def calc_sales_quantities
     totals = Hash.new(0)
     invoice_items.each do |ii|
       next if invoice_pending?(ii.invoice_id)
