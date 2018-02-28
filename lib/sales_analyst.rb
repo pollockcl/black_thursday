@@ -29,10 +29,19 @@ class SalesAnalyst
   end
 
   def average_items_per_merchant
+    @average_items_per_merchant ||= calc_avg_items_per_merch
+  end
+
+  def calc_avg_items_per_merch
     average(items.size, merchants.size).to_f.round(2)
   end
 
   def average_items_per_merchant_standard_deviation
+    @average_items_per_merchant_standard_deviation ||=
+      calc_avg_items_per_merch_stdev
+  end
+
+  def calc_avg_items_per_merch_stdev
     data = merchants.map { |merchant| merchant.items.size }
     standard_deviation(data, average_items_per_merchant).round(2)
   end
@@ -60,6 +69,10 @@ class SalesAnalyst
   end
 
   def average_invoices_per_merchant
+    @average_invoices_per_merchant ||= calc_avg_inv_per_merch
+  end
+
+  def calc_avg_inv_per_merch
     average(invoices.size, merchants.size).to_f
   end
 
@@ -98,6 +111,10 @@ class SalesAnalyst
   end
 
   def merchants_ranked_by_revenue
+    @merchants_ranked_by_revenue ||= calc_merch_ranked_by_rev
+  end
+
+  def calc_merch_ranked_by_rev
     merchants.sort_by do |merchant|
       merchant.invoices.map(&:total).reduce(:+)
     end.reverse
@@ -118,6 +135,11 @@ class SalesAnalyst
   end
 
   def average_invoices_per_merchant_standard_deviation
+    @average_invoices_per_merchant_standard_deviation ||=
+      calc_avg_inv_per_merch_stdev
+  end
+
+  def calc_avg_inv_per_merch_stdev
     data = merchants.map { |merchant| net_invoices(merchant.id) }
     standard_deviation(data, average_invoices_per_merchant).round(2)
   end
@@ -140,15 +162,27 @@ class SalesAnalyst
   end
 
   def average_daily_invoices
+    @average_daily_invoices ||= calc_avg_daily_inv
+  end
+
+  def calc_avg_daily_inv
     average(invoices.size, 7)
   end
 
   def find_days
+    @find_days ||= calc_find_days
+  end
+
+  def calc_find_days
     data = invoices.group_by(&:weekday_created)
     data.each_key { |day| data[day] = data[day].size }
   end
 
   def std_deviation_daily_invoices
+    @std_deviation_daily_invoices ||= calc_stdev_daily_inv
+  end
+
+  def calc_stdev_daily_inv
     standard_deviation(find_days.invert, average_daily_invoices)
   end
 
@@ -164,11 +198,19 @@ class SalesAnalyst
   end
 
   def average_item_price
+    @average_item_price ||= calc_avg_item_price
+  end
+
+  def calc_avg_item_price
     numerator = items.map { |item| item.unit_price.to_i }.reduce(:+)
     average(numerator, items.size)
   end
 
   def average_item_price_standard_deviation
+    @average_item_price_standard_deviation ||= calc_avg_item_price_stdev
+  end
+
+  def calc_avg_item_price_stdev
     data = items.map { |item| item.unit_price.to_i }
     standard_deviation(data, average_item_price)
   end
